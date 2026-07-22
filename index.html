@@ -1,0 +1,586 @@
+<title>Zonar Equipment ↔ Platform Lookup</title>
+<style>
+  :root {
+    --bg: #F5F6F8;
+    --surface: #FFFFFF;
+    --surface-2: #EEF0F3;
+    --text: #16203A;
+    --text-muted: #5B6472;
+    --border: #E2E5EA;
+    --primary: #16233D;
+    --accent: #C9822F;
+    --accent-soft: #F3E2C9;
+    --v1: #445068;
+    --v1-soft: #E7EAF0;
+    --v2: #1D6E5C;
+    --v2-soft: #DCEEE9;
+    --success: #2F9E5B;
+    --success-soft: #E1F4E8;
+    --danger: #B3392E;
+    --danger-soft: #F8E2DF;
+    --shadow: 0 1px 2px rgba(22,32,58,0.06), 0 4px 16px rgba(22,32,58,0.05);
+    --radius: 10px;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0F141C;
+      --surface: #161D28;
+      --surface-2: #1D2530;
+      --text: #E7EAEE;
+      --text-muted: #98A2B3;
+      --border: #2A3341;
+      --primary: #C9D2E0;
+      --accent: #E4A94F;
+      --accent-soft: #3A2E17;
+      --v1: #9AA8C4;
+      --v1-soft: #232B3A;
+      --v2: #6FD3B8;
+      --v2-soft: #16332C;
+      --success: #4CB878;
+      --success-soft: #17301F;
+      --danger: #E17164;
+      --danger-soft: #3A1E1A;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 4px 20px rgba(0,0,0,0.35);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0F141C; --surface: #161D28; --surface-2: #1D2530; --text: #E7EAEE; --text-muted: #98A2B3;
+    --border: #2A3341; --primary: #C9D2E0; --accent: #E4A94F; --accent-soft: #3A2E17;
+    --v1: #9AA8C4; --v1-soft: #232B3A; --v2: #6FD3B8; --v2-soft: #16332C;
+    --success: #4CB878; --success-soft: #17301F; --danger: #E17164; --danger-soft: #3A1E1A;
+    color-scheme: dark;
+  }
+  :root[data-theme="light"] {
+    --bg: #F5F6F8; --surface: #FFFFFF; --surface-2: #EEF0F3; --text: #16203A; --text-muted: #5B6472;
+    --border: #E2E5EA; --primary: #16233D; --accent: #C9822F; --accent-soft: #F3E2C9;
+    --v1: #445068; --v1-soft: #E7EAF0; --v2: #1D6E5C; --v2-soft: #DCEEE9;
+    --success: #2F9E5B; --success-soft: #E1F4E8; --danger: #B3392E; --danger-soft: #F8E2DF;
+    color-scheme: light;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px 100px;
+  }
+  header.page {
+    margin-bottom: 28px;
+  }
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--accent);
+    margin: 0 0 8px;
+  }
+  h1 {
+    font-size: 27px;
+    font-weight: 700;
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+    color: var(--primary);
+  }
+  .sub {
+    color: var(--text-muted);
+    font-size: 14.5px;
+    max-width: 62ch;
+    margin: 0;
+  }
+
+  .search-shell {
+    position: relative;
+    margin: 22px 0 14px;
+  }
+  .search-shell svg {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 17px;
+    height: 17px;
+    stroke: var(--text-muted);
+    pointer-events: none;
+  }
+  #search {
+    width: 100%;
+    padding: 13px 14px 13px 42px;
+    font-size: 15.5px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--text);
+    font-family: inherit;
+    box-shadow: var(--shadow);
+  }
+  #search:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+  #search::placeholder { color: var(--text-muted); }
+
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-bottom: 22px;
+  }
+  .chip-filter {
+    font-family: inherit;
+    font-size: 12.5px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text-muted);
+    cursor: pointer;
+  }
+  .chip-filter[aria-pressed="true"] {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: var(--surface);
+  }
+  :root[data-theme="dark"] .chip-filter[aria-pressed="true"] { color: var(--bg); }
+  @media (prefers-color-scheme: dark) {
+    .chip-filter[aria-pressed="true"] { color: var(--bg); }
+  }
+
+  .count-line {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    margin: 0 0 12px;
+  }
+
+  .results {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 16px 15px;
+    box-shadow: var(--shadow);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px 16px;
+    align-items: start;
+  }
+  .card-main { min-width: 0; }
+  .card-title-row {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    flex-wrap: wrap;
+    margin-bottom: 5px;
+  }
+  .card-name {
+    font-family: ui-monospace, "SF Mono", "Cascadia Code", Consolas, Menlo, monospace;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+  .tag {
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 2px 7px;
+    border-radius: 5px;
+    white-space: nowrap;
+  }
+  .tag-core { background: var(--accent-soft); color: var(--accent); }
+  .tag-related { background: var(--surface-2); color: var(--text-muted); }
+  .category {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 7px;
+  }
+  .platform-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+  .badge {
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 6px;
+  }
+  .badge-v1 { background: var(--v1-soft); color: var(--v1); }
+  .badge-v2 { background: var(--v2-soft); color: var(--v2); }
+  .notes {
+    font-size: 13px;
+    color: var(--text-muted);
+    max-width: 60ch;
+  }
+  .compare-btn {
+    font-family: inherit;
+    font-size: 12.5px;
+    font-weight: 600;
+    padding: 7px 13px;
+    border-radius: 7px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .compare-btn[aria-pressed="true"] {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: var(--surface);
+  }
+  @media (prefers-color-scheme: dark) { .compare-btn[aria-pressed="true"] { color: var(--bg); } }
+  :root[data-theme="dark"] .compare-btn[aria-pressed="true"] { color: var(--bg); }
+
+  .empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-muted);
+    font-size: 14px;
+  }
+
+  details.full-table {
+    margin-top: 30px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    box-shadow: var(--shadow);
+  }
+  details.full-table summary {
+    cursor: pointer;
+    padding: 14px 16px;
+    font-weight: 600;
+    font-size: 13.5px;
+    color: var(--primary);
+    list-style: none;
+  }
+  details.full-table summary::-webkit-details-marker { display: none; }
+  details.full-table summary::before {
+    content: "▸ ";
+    color: var(--accent);
+  }
+  details.full-table[open] summary::before { content: "▾ "; }
+  .table-scroll { overflow-x: auto; padding: 0 16px 16px; }
+  table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  th:nth-child(4), td:nth-child(4) { white-space: normal; }
+  th { color: var(--text-muted); font-weight: 600; text-transform: uppercase; font-size: 10.5px; letter-spacing: 0.03em; }
+  td.name-cell { font-family: ui-monospace, "SF Mono", Consolas, Menlo, monospace; color: var(--text); }
+
+  footer.disclaimer {
+    margin-top: 32px;
+    font-size: 12px;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+  }
+  footer.disclaimer p { margin: 0 0 6px; }
+
+  /* Sticky compare tray */
+  .tray {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    box-shadow: 0 -6px 24px rgba(0,0,0,0.12);
+    padding: 14px 20px;
+    transform: translateY(100%);
+    transition: transform 0.22s ease;
+    z-index: 10;
+  }
+  @media (prefers-reduced-motion: reduce) { .tray { transition: none; } }
+  .tray.visible { transform: translateY(0); }
+  .tray-inner { max-width: 900px; margin: 0 auto; }
+  .tray-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .tray-title { font-size: 12.5px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; }
+  .clear-btn {
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 0;
+  }
+  .tray-chips { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 12px; }
+  .tray-chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--surface-2);
+    border-radius: 999px;
+    padding: 5px 6px 5px 12px;
+    font-size: 12.5px;
+    font-family: ui-monospace, "SF Mono", Consolas, Menlo, monospace;
+  }
+  .tray-chip button {
+    border: none;
+    background: var(--border);
+    color: var(--text);
+    border-radius: 50%;
+    width: 17px;
+    height: 17px;
+    line-height: 17px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 0;
+  }
+  .verdict {
+    border-radius: 8px;
+    padding: 11px 14px;
+    font-size: 13.5px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .verdict-compatible { background: var(--success-soft); color: var(--success); }
+  .verdict-incompatible { background: var(--danger-soft); color: var(--danger); }
+  .verdict-icon { flex-shrink: 0; margin-top: 1px; }
+  .verdict-text b { font-weight: 700; }
+  .verdict-detail { display: block; margin-top: 3px; opacity: 0.85; font-weight: 500; }
+
+  a { color: var(--accent); }
+</style>
+
+<div class="wrap">
+  <header class="page">
+    <p class="eyebrow">Sales &amp; Support Reference</p>
+    <h1>Equipment ↔ Platform Lookup</h1>
+    <p class="sub">Search any hardware or product by name to see which Zonar platform it runs on. Add multiple items to check whether they can run together on one platform.</p>
+  </header>
+
+  <div class="search-shell">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+    <input id="search" type="text" placeholder="Search e.g. “VidFleet”, “Apollo”, “tablet”, “V4”…" autocomplete="off">
+  </div>
+
+  <div class="filters" id="filters"></div>
+  <p class="count-line" id="countLine"></p>
+  <div class="results" id="results"></div>
+  <div class="empty-state" id="emptyState" style="display:none;">No matches. Try a broader term, or check spelling of the model name.</div>
+
+  <details class="full-table">
+    <summary>View full hardware &amp; platform table (12 items)</summary>
+    <div class="table-scroll">
+      <table id="fullTable">
+        <thead>
+          <tr><th>Item</th><th>Category</th><th>Platform</th><th>Notes</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </details>
+
+  <footer class="disclaimer">
+    <p><strong>Source:</strong> Product &amp; Sales Sync, Jul 21 2026 — “Supported Hardware” (core TCU/camera/ELD/tablet table) plus related product context from the ELD, EVIR, and Video sections.</p>
+    <p>Ignition v2.0 and GTC/GTCx share the same backend, so they're treated as one platform here. Ignition v1.0 runs on a separate (PX) backend. This is a snapshot — the architecture decision due end of month may change qualification rules. For anything not listed, or to confirm before a deal, check with Bryant Maxey (ELD, EVIR, tablet &amp; camera hardware) or Devin Meadows (Ignition platform, video).</p>
+  </footer>
+</div>
+
+<div class="tray" id="tray">
+  <div class="tray-inner">
+    <div class="tray-head">
+      <span class="tray-title" id="trayTitle">Comparing 0 items</span>
+      <button class="clear-btn" id="clearAll">Clear all</button>
+    </div>
+    <div class="tray-chips" id="trayChips"></div>
+    <div class="verdict" id="verdict"></div>
+  </div>
+</div>
+
+<script>
+const PLATFORM_LABEL = { v1: 'Ignition v1.0', v2: 'Ignition v2.0 / GTC' };
+
+const ITEMS = [
+  { id: 'v4tcu', name: 'V4 TCU', aliases: ['v4', 'telematics control unit', 'tcu'], category: 'TCU / Telematics Hardware', platforms: ['v2'], core: true,
+    notes: 'Primary v2.0 TCU · runs Zonar Logs ELD · supports camera-as-TCU.' },
+  { id: 'gtctcu', name: 'GTC / GTCx TCU', aliases: ['gtc', 'gtcx'], category: 'TCU / Telematics Hardware', platforms: ['v2'], core: true,
+    notes: 'GTC and Ignition v2.0 share the same backend — same platform, same qualification.' },
+  { id: 'zonarld', name: "Zonar LD (Light-Duty TCU)", aliases: ['zonar ld', 'ld tcu', 'light duty'], category: 'TCU / Telematics Hardware', platforms: ['v2'], core: true,
+    notes: 'A GTC product.' },
+  { id: 'geometris', name: "Geometris Plug'n'Play", aliases: ['geometris', "plug'n'play", 'plug and play', 'light-duty tcu'], category: 'TCU / Telematics Hardware', platforms: ['v1'], core: true,
+    notes: 'Light-duty TCU option — Ignition v1.0 only.' },
+  { id: 'coach', name: 'Coach Cameras (MiTac + LightMetrics)', aliases: ['coach', 'mitac', 'lightmetrics', 'coach camera'], category: 'Camera', platforms: ['v2'], core: true,
+    notes: 'Single-pane-of-glass video is only available at v2.0. Coach is the current GTC(x) video product.' },
+  { id: 'vidfleet', name: 'VidFleet Cameras (Waylens)', aliases: ['vidfleet', 'waylens'], category: 'Camera', platforms: ['v1'], core: true,
+    notes: 'Video for Ignition v1.0; incremental improvements planned. Camera-manufacturer direction is still under evaluation company-wide.' },
+  { id: 'apollo', name: 'Apollo ELD Hardware (Geometris)', aliases: ['apollo', 'apollo eld', 'geo79'], category: 'ELD', platforms: ['v1'], core: true,
+    notes: 'Certified Apollo ELD fit, Geo79-certified in the US. Also approved in Canada.' },
+  { id: 'tablets', name: 'Managed Tablets (Samsung TA5 / MiTac F840)', aliases: ['samsung ta5', 'mitac f840', 'managed tablet', 'tablet'], category: 'Tablet', platforms: ['v2'], core: true,
+    notes: 'Runs Zonar Logs ELD and EVIR on GTC / Ignition v2.0.' },
+
+  { id: 'zlogs', name: 'ZLogs (ELD software)', aliases: ['zlogs', 'zonar logs'], category: 'ELD Software', platforms: ['v2'], core: false,
+    notes: "Runs on Ignition v2.0 and GTC/GTCx. Canada-approved on the Transport Canada registry as of 7/17 (ComDriver recertification)." },
+  { id: 'handhelds', name: '2010 Handhelds', aliases: ['2010 handheld', 'handheld'], category: 'EVIR Hardware', platforms: ['v2'], core: false,
+    notes: 'EVIR available now on GTC / Ignition v2.0.' },
+  { id: 'evirmobile', name: 'EVIR Mobile', aliases: ['evir mobile', 'byod evir'], category: 'EVIR Software', platforms: ['v2'], core: false,
+    notes: 'BYOD or Managed Tablets, on GTC / Ignition v2.0.' },
+  { id: 'mobileapp', name: 'Zonar Mobile App', aliases: ['mobile app', 'driver app'], category: 'Software', platforms: ['v2'], core: false,
+    notes: 'Ships with the Ignition v2.0 launch; in beta now (MasTec anchor customer); not yet GA.' },
+];
+
+const state = { query: '', activeFilter: 'all', selected: new Set() };
+
+const CATEGORIES = ['all', ...Array.from(new Set(ITEMS.map(i => i.category)))];
+
+function norm(s) { return s.toLowerCase().trim(); }
+
+function matches(item, q) {
+  if (!q) return true;
+  const hay = [item.name, ...item.aliases].map(norm).join(' | ');
+  return hay.includes(q);
+}
+
+function renderFilters() {
+  const el = document.getElementById('filters');
+  el.innerHTML = '';
+  CATEGORIES.forEach(cat => {
+    const btn = document.createElement('button');
+    btn.className = 'chip-filter';
+    btn.type = 'button';
+    btn.setAttribute('aria-pressed', String(state.activeFilter === cat));
+    btn.textContent = cat === 'all' ? 'All categories' : cat;
+    btn.addEventListener('click', () => { state.activeFilter = cat; render(); });
+    el.appendChild(btn);
+  });
+}
+
+function platformBadges(platforms) {
+  return platforms.map(p => `<span class="badge badge-${p}">${PLATFORM_LABEL[p]}</span>`).join('');
+}
+
+function renderResults() {
+  const q = norm(state.query);
+  const list = ITEMS.filter(i => (state.activeFilter === 'all' || i.category === state.activeFilter) && matches(i, q));
+  const resultsEl = document.getElementById('results');
+  const emptyEl = document.getElementById('emptyState');
+  const countEl = document.getElementById('countLine');
+
+  countEl.textContent = q || state.activeFilter !== 'all'
+    ? `${list.length} match${list.length === 1 ? '' : 'es'}`
+    : `${list.length} items total`;
+
+  resultsEl.innerHTML = '';
+  emptyEl.style.display = list.length ? 'none' : 'block';
+
+  list.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    const selected = state.selected.has(item.id);
+    card.innerHTML = `
+      <div class="card-main">
+        <div class="card-title-row">
+          <span class="card-name">${item.name}</span>
+          <span class="tag ${item.core ? 'tag-core' : 'tag-related'}">${item.core ? 'Hardware table' : 'Related product'}</span>
+        </div>
+        <div class="category">${item.category}</div>
+        <div class="platform-badges">${platformBadges(item.platforms)}</div>
+        <div class="notes">${item.notes}</div>
+      </div>
+      <button class="compare-btn" type="button" aria-pressed="${selected}">${selected ? '✓ Added' : '+ Compare'}</button>
+    `;
+    card.querySelector('.compare-btn').addEventListener('click', () => {
+      if (state.selected.has(item.id)) state.selected.delete(item.id);
+      else state.selected.add(item.id);
+      render();
+    });
+    resultsEl.appendChild(card);
+  });
+}
+
+function renderFullTable() {
+  const tbody = document.querySelector('#fullTable tbody');
+  tbody.innerHTML = '';
+  ITEMS.forEach(item => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td class="name-cell">${item.name}</td>
+      <td>${item.category}</td>
+      <td>${platformBadges(item.platforms)}</td>
+      <td>${item.notes}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function renderTray() {
+  const tray = document.getElementById('tray');
+  const chipsEl = document.getElementById('trayChips');
+  const verdictEl = document.getElementById('verdict');
+  const titleEl = document.getElementById('trayTitle');
+  const selectedItems = ITEMS.filter(i => state.selected.has(i.id));
+
+  if (selectedItems.length === 0) {
+    tray.classList.remove('visible');
+    return;
+  }
+  tray.classList.add('visible');
+  titleEl.textContent = `Comparing ${selectedItems.length} item${selectedItems.length === 1 ? '' : 's'}`;
+
+  chipsEl.innerHTML = '';
+  selectedItems.forEach(item => {
+    const chip = document.createElement('div');
+    chip.className = 'tray-chip';
+    chip.innerHTML = `${item.name} <button type="button" aria-label="Remove ${item.name}">&times;</button>`;
+    chip.querySelector('button').addEventListener('click', () => {
+      state.selected.delete(item.id);
+      render();
+    });
+    chipsEl.appendChild(chip);
+  });
+
+  verdictEl.className = 'verdict';
+  if (selectedItems.length === 1) {
+    verdictEl.classList.add('verdict-compatible');
+    verdictEl.innerHTML = `<span class="verdict-icon">ℹ️</span><span class="verdict-text">Add a second item to check whether they work on the same platform.</span>`;
+    return;
+  }
+
+  const commonPlatforms = ['v1', 'v2'].filter(p => selectedItems.every(i => i.platforms.includes(p)));
+
+  if (commonPlatforms.length > 0) {
+    verdictEl.classList.add('verdict-compatible');
+    verdictEl.innerHTML = `<span class="verdict-icon">✅</span><span class="verdict-text"><b>Compatible</b> — all selected items run on ${commonPlatforms.map(p => PLATFORM_LABEL[p]).join(' and ')}.</span>`;
+  } else {
+    const v1Items = selectedItems.filter(i => i.platforms.includes('v1')).map(i => i.name);
+    const v2Items = selectedItems.filter(i => i.platforms.includes('v2')).map(i => i.name);
+    verdictEl.classList.add('verdict-incompatible');
+    verdictEl.innerHTML = `<span class="verdict-icon">⚠️</span><span class="verdict-text"><b>Incompatible</b> — no single platform supports all of these.
+      <span class="verdict-detail">${PLATFORM_LABEL.v1} only: ${v1Items.join(', ') || '—'}</span>
+      <span class="verdict-detail">${PLATFORM_LABEL.v2} only: ${v2Items.join(', ') || '—'}</span></span>`;
+  }
+}
+
+function render() {
+  renderFilters();
+  renderResults();
+  renderTray();
+}
+
+document.getElementById('search').addEventListener('input', (e) => { state.query = e.target.value; render(); });
+document.getElementById('clearAll').addEventListener('click', () => { state.selected.clear(); render(); });
+
+renderFullTable();
+render();
+</script>
