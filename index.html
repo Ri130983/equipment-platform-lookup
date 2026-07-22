@@ -164,6 +164,21 @@
     margin: 0 0 12px;
   }
 
+  .quick-compare {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .quick-warning {
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    background: var(--surface-2);
+    color: var(--text-muted);
+  }
+  .quick-warning b { color: var(--text); }
+
   .results {
     display: flex;
     flex-direction: column;
@@ -367,13 +382,14 @@
   <header class="page">
     <p class="eyebrow">Sales &amp; Support Reference</p>
     <h1>Equipment ↔ Platform Lookup</h1>
-    <p class="sub">Search any hardware or product by name to see which Zonar platform it runs on. Add multiple items to check whether they can run together on one platform.</p>
+    <p class="sub">Search any hardware or product by name to see which Zonar platform it runs on. Separate multiple items with a comma (e.g. “VidFleet, Apollo”) to check whether they can run together on one platform — or add them one at a time with the Compare button.</p>
   </header>
 
   <div class="search-shell">
     <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-    <input id="search" type="text" placeholder="Search e.g. “VidFleet”, “Apollo”, “tablet”, “V4”…" autocomplete="off">
+    <input id="search" type="text" placeholder="Search “VidFleet”, or compare “VidFleet, Apollo”…" autocomplete="off">
   </div>
+  <div class="quick-compare" id="quickCompare" style="display:none;"></div>
 
   <div class="filters" id="filters"></div>
   <p class="count-line" id="countLine"></p>
@@ -446,10 +462,20 @@ const CATEGORIES = ['all', ...Array.from(new Set(ITEMS.map(i => i.category)))];
 
 function norm(s) { return s.toLowerCase().trim(); }
 
-function matches(item, q) {
-  if (!q) return true;
+// Splits "VidFleet, Apollo" / "VidFleet and Apollo" / "VidFleet + Apollo" into separate search terms.
+function splitTerms(query) {
+  return query.split(/,|;|\band\b|\+/i).map(norm).filter(Boolean);
+}
+
+function matchesTerm(item, term) {
   const hay = [item.name, ...item.aliases].map(norm).join(' | ');
-  return hay.includes(q);
+  return hay.includes(term);
+}
+
+function matchesQuery(item, query) {
+  const terms = splitTerms(query);
+  if (terms.length === 0) return true;
+  return terms.some(t => matchesTerm(item, t));
 }
 
 function renderFilters() {
@@ -471,8 +497,8 @@ function platformBadges(platforms) {
 }
 
 function renderResults() {
-  const q = norm(state.query);
-  const list = ITEMS.filter(i => (state.activeFilter === 'all' || i.category === state.activeFilter) && matches(i, q));
+  const q = state.query.trim();
+  const list = ITEMS.filter(i => (state.activeFilter === 'all' || i.category === state.activeFilter) && matchesQuery(i, q));
   const resultsEl = document.getElementById('results');
   const emptyEl = document.getElementById('emptyState');
   const countEl = document.getElementById('countLine');
@@ -572,10 +598,53 @@ function renderTray() {
   }
 }
 
+function renderQuickCompare() {
+  const container = document.getElementById('quickCompare');
+  const terms = splitTerms(state.query);
+
+  if (terms.length < 2) {
+    container.style.display = 'none';
+    container.innerHTML = '';
+    return;
+  }
+
+  const perTerm = terms.map(term => ({ term, found: ITEMS.filter(i => matchesTerm(i, term)) }));
+  const unmatched = perTerm.filter(p => p.found.length === 0);
+  const ambiguous = perTerm.filter(p => p.found.length > 1);
+  const resolved = perTerm.filter(p => p.found.length === 1).map(p => p.found[0]);
+
+  let html = '';
+
+  if (unmatched.length) {
+    html += `<div class="quick-warning">No match for ${unmatched.map(u => `<b>“${u.term}”</b>`).join(', ')} — check spelling or try a shorter term.</div>`;
+  }
+  if (ambiguous.length) {
+    html += `<div class="quick-warning">${ambiguous.map(a => `<b>“${a.term}”</b> matched ${a.found.length} items`).join('; ')} — see the results below and use the Compare button to pick the exact one(s) you mean.</div>`;
+  }
+
+  if (resolved.length >= 2) {
+    const commonPlatforms = ['v1', 'v2'].filter(p => resolved.every(i => i.platforms.includes(p)));
+    const verdictClass = commonPlatforms.length ? 'verdict-compatible' : 'verdict-incompatible';
+    if (commonPlatforms.length > 0) {
+      html += `<div class="verdict ${verdictClass}"><span class="verdict-icon">✅</span><span class="verdict-text"><b>Compatible</b> — ${resolved.map(i => i.name).join(', ')} all run on ${commonPlatforms.map(p => PLATFORM_LABEL[p]).join(' and ')}.</span></div>`;
+    } else {
+      const v1Items = resolved.filter(i => i.platforms.includes('v1')).map(i => i.name);
+      const v2Items = resolved.filter(i => i.platforms.includes('v2')).map(i => i.name);
+      html += `<div class="verdict ${verdictClass}"><span class="verdict-icon">⚠️</span><span class="verdict-text"><b>Incompatible</b> — no single platform supports all of these.
+        <span class="verdict-detail">${PLATFORM_LABEL.v1} only: ${v1Items.join(', ') || '—'}</span>
+        <span class="verdict-detail">${PLATFORM_LABEL.v2} only: ${v2Items.join(', ') || '—'}</span></span></div>`;
+    }
+  }
+
+  container.style.display = html ? 'flex' : 'none';
+  container.innerHTML = html;
+}
+
 function render() {
   renderFilters();
   renderResults();
   renderTray();
+  renderQuickCompare();
 }
 
 document.getElementById('search').addEventListener('input', (e) => { state.query = e.target.value; render(); });
