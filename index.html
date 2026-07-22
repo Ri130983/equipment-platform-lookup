@@ -40,7 +40,7 @@
     --text-primary: #212121;
     --text-secondary: #666666;
 
-    /* Feedback colors — reserved for the compatibility verdict only */
+    /* Feedback colors — reserved for verdicts and status */
     --success-green: #2E7D32;
     --success-green-soft: #E8F3E9;
     --warning-yellow: #FFB300;
@@ -48,13 +48,11 @@
     --error-red: #D32F2F;
     --error-red-soft: #FBE9E8;
 
-    /* Core 6-color brand palette — used for platform badges and provenance tags */
+    /* Core 6-color brand palette — platform badges and provenance tags */
     --true-blue: #00AEEF;
-    --true-blue-soft: #E3F7FE;
     --power-purple: #8400FF;
     --power-purple-soft: #F1E1FF;
     --precision-blue: #005BF8;
-    --precision-blue-soft: #E1EAFE;
 
     --border: #E0E0E0;
     --shadow: 0 1px 2px rgba(33, 33, 33, 0.05), 0 4px 14px rgba(33, 33, 33, 0.06);
@@ -102,9 +100,105 @@
     margin: 0;
   }
 
+  .mode-tabs {
+    display: flex;
+    gap: 8px;
+    margin: 26px 0 22px;
+  }
+  .mode-tab {
+    font-family: inherit;
+    font-size: 14pt;
+    font-weight: 700;
+    padding: 10px 18px;
+    border-radius: 999px;
+    border: 1.5px solid var(--border);
+    background: var(--bg);
+    color: var(--text-primary);
+    cursor: pointer;
+  }
+  .mode-tab[aria-pressed="true"] {
+    background: var(--action-blue);
+    border-color: var(--action-blue);
+    color: #FFFFFF;
+  }
+
+  .needs-intro {
+    font-size: 14pt;
+    font-weight: 400;
+    color: var(--text-secondary);
+    margin: 0 0 18px;
+    max-width: 68ch;
+  }
+  .needs-group-label {
+    font-size: 14pt;
+    font-weight: 700;
+    color: var(--text-secondary);
+    margin: 20px 0 4px;
+  }
+  .needs-group-label:first-child { margin-top: 0; }
+  .needs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+  .need-card {
+    all: unset;
+    box-sizing: border-box;
+    font-family: 'Roboto', Arial, sans-serif;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    width: 100%;
+  }
+  .need-card[aria-pressed="true"] { border-color: var(--action-blue); }
+  .need-checkbox {
+    width: 22px;
+    height: 22px;
+    border-radius: 5px;
+    border: 2px solid var(--border);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+  }
+  .need-checkbox svg { width: 14px; height: 14px; stroke: #FFFFFF; display: none; }
+  .need-card[aria-pressed="true"] .need-checkbox { background: var(--action-blue); border-color: var(--action-blue); }
+  .need-card[aria-pressed="true"] .need-checkbox svg { display: block; }
+  .need-content { flex: 1; min-width: 0; text-align: left; }
+  .need-label-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+  }
+  .need-label { font-size: 16pt; font-weight: 500; color: var(--text-primary); }
+  .need-description { font-size: 14pt; font-weight: 300; color: var(--text-secondary); display: block; }
+
+  .status-badge { font-size: 14pt; font-weight: 700; padding: 2px 9px; border-radius: 5px; }
+  .status-ga { background: var(--success-green-soft); color: var(--success-green); }
+  .status-beta { background: var(--warning-yellow); color: var(--text-primary); }
+
+  .needs-recommendation { margin-bottom: 22px; }
+  .needs-breakdown-list { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+  .need-breakdown { background: var(--interface-gray); border-radius: 8px; padding: 14px 16px; }
+  .need-breakdown-head { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+  .need-breakdown-label { font-size: 14pt; font-weight: 500; color: var(--text-primary); }
+  .need-breakdown-platform { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; flex-wrap: wrap; }
+  .need-breakdown-equipment { font-size: 14pt; font-weight: 400; color: var(--text-primary); }
+  .need-breakdown-note { font-size: 14pt; font-weight: 300; color: var(--text-secondary); margin-top: 6px; }
+
   .search-shell {
     position: relative;
-    margin: 24px 0 14px;
+    margin: 4px 0 14px;
   }
   .search-shell svg {
     position: absolute;
@@ -229,12 +323,12 @@
   .platform-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
   .badge {
     font-size: 14pt;
-    font-weight: 500;
+    font-weight: 700;
     padding: 4px 11px;
     border-radius: 6px;
   }
-  .badge-v1 { background: var(--precision-blue-soft); color: var(--precision-blue); }
-  .badge-v2 { background: var(--true-blue-soft); color: var(--true-blue); }
+  .badge-v1 { background: var(--precision-blue); color: #FFFFFF; }
+  .badge-v2 { background: var(--true-blue); color: var(--text-primary); }
   .notes {
     font-size: 14pt;
     font-weight: 400;
@@ -375,7 +469,6 @@
   }
   .verdict-compatible { background: var(--success-green-soft); color: var(--text-primary); }
   .verdict-incompatible { background: var(--error-red-soft); color: var(--text-primary); }
-  .verdict-ambiguous { background: var(--warning-yellow-soft); color: var(--text-primary); }
   .verdict-compatible b { color: var(--success-green); }
   .verdict-incompatible b { color: var(--error-red); }
   .verdict-icon { flex-shrink: 0; margin-top: 1px; }
@@ -388,22 +481,35 @@
   <header class="page">
     <p class="eyebrow">Sales &amp; support reference</p>
     <h1>Equipment ↔ platform lookup</h1>
-    <p class="sub">Search any hardware or product by name to see which Zonar platform it runs on. Separate multiple items with a comma (e.g. “VidFleet, Apollo”) to check whether they can run together on one platform — or add them one at a time with the compare button.</p>
+    <p class="sub">Select what the customer needs to get a platform recommendation, or switch to equipment search if you already know the model name. Add more than one to check whether everything works together.</p>
   </header>
 
-  <div class="search-shell">
-    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-    <input id="search" type="text" placeholder="Search “VidFleet”, or compare “VidFleet, Apollo”…" autocomplete="off">
+  <div class="mode-tabs" id="modeTabs">
+    <button class="mode-tab" type="button" data-mode="needs">By customer need</button>
+    <button class="mode-tab" type="button" data-mode="equipment">By equipment name</button>
   </div>
-  <div class="quick-compare" id="quickCompare" style="display:none;"></div>
 
-  <div class="filters" id="filters"></div>
-  <p class="count-line" id="countLine"></p>
-  <div class="results" id="results"></div>
-  <div class="empty-state" id="emptyState" style="display:none;">No matches. Try a broader term, or check spelling of the model name.</div>
+  <div id="needsPanel">
+    <p class="needs-intro">Select everything the customer needs. We'll recommend the platform that covers all of it — or flag the conflict if nothing does.</p>
+    <div class="needs-recommendation" id="needsRecommendation" style="display:none;"></div>
+    <div class="needs-list" id="needsList"></div>
+  </div>
+
+  <div id="equipmentPanel" style="display:none;">
+    <div class="search-shell">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input id="search" type="text" placeholder="Search “VidFleet”, or compare “VidFleet, Apollo”…" autocomplete="off">
+    </div>
+    <div class="quick-compare" id="quickCompare" style="display:none;"></div>
+
+    <div class="filters" id="filters"></div>
+    <p class="count-line" id="countLine"></p>
+    <div class="results" id="results"></div>
+    <div class="empty-state" id="emptyState" style="display:none;">No matches. Try a broader term, or check spelling of the model name.</div>
+  </div>
 
   <details class="full-table">
-    <summary>View full hardware &amp; platform table (12 items)</summary>
+    <summary>View full hardware &amp; platform table (14 items)</summary>
     <div class="table-scroll">
       <table id="fullTable">
         <thead>
@@ -415,8 +521,9 @@
   </details>
 
   <footer class="disclaimer">
-    <p><strong>Source:</strong> Product and Sales Sync, Jul 21 2026 — the “Supported Hardware” slide (core TCU, camera, ELD, and tablet table), plus related product context from the ELD, EVIR, and video sections.</p>
-    <p>Ignition v2.0 and GTC/GTCx share the same backend, so they're treated as one platform here. Ignition v1.0 runs on a separate (PX) backend. This is a snapshot — the architecture decision due end of month may change qualification rules. For anything not listed, or to confirm before a deal, check with Bryant Maxey (ELD, EVIR, tablet and camera hardware) or Devin Meadows (Ignition platform, video).</p>
+    <p><strong>Source:</strong> Product and Sales Sync, Jul 21 2026 — the “Supported Hardware” slide for equipment-name search, plus related product and roadmap context from the ELD, EVIR, Video, Mobile App, Neurion AI, and Integrations sections for the customer-need recommendations.</p>
+    <p>Ignition v2.0 and GTC/GTCx share the same backend, so they're treated as one platform here. Ignition v1.0 runs on a separate (PX) backend. This is a snapshot — the architecture decision due end of month may change qualification rules.</p>
+    <p>For anything not listed, or to confirm before a deal, check with the relevant PM: Bryant Maxey (ELD, EVIR, tablet and camera hardware), Devin Meadows (Ignition platform, video), Tatiana Badiceanu (AI products, CARB/emissions, integrations), or Terry Harleman (Zonar mobile app).</p>
   </footer>
 </div>
 
@@ -460,13 +567,45 @@ const ITEMS = [
     notes: 'BYOD or managed tablets, on GTC / Ignition v2.0.' },
   { id: 'mobileapp', name: 'Zonar mobile app', aliases: ['mobile app', 'driver app'], category: 'Software', platforms: ['v2'], core: false,
     notes: 'Ships with the Ignition v2.0 launch; in beta now (MasTec anchor customer); not yet GA.' },
+  { id: 'neurion', name: 'Neurion Knowledge Base', aliases: ['neurion', 'knowledge base agent', 'ai assistant'], category: 'Software', platforms: ['v1'], core: false,
+    notes: 'AI assistant for product knowledge, in beta on Ignition v1.0 for selected users. v2.0 Knowledge Base, Fleet, and Insights agents are on the roadmap.' },
+  { id: 'deviceless', name: 'Deviceless Telematics (OEM aggregator)', aliases: ['deviceless telematics', 'cerebrumx', 'oem telematics'], category: 'Software', platforms: ['v1'], core: false,
+    notes: 'Live in Ignition Core (v1.0): real-time visibility, safety insights, diagnostics, EV reporting. Ignition v2.0 version is early-stage.' },
 ];
 
-const state = { query: '', activeFilter: 'all', selected: new Set() };
+const NEEDS = [
+  { id: 'carb', group: 'Compliance and inspections', label: 'CARB / emissions compliance', description: 'State and federal emissions reporting requirements.', platforms: ['v2'], status: 'ga',
+    equipment: { v2: ['v4tcu'] }, note: 'V4 is the only hardware that qualifies today. PX (Ignition v1.0) is being phased out for CARB — GTCx and Ignition v2.0 are the preferred platforms.' },
+  { id: 'eld-us', group: 'Compliance and inspections', label: 'ELD compliance — US', description: 'Electronic logging device requirements for US fleets.', platforms: ['v1', 'v2'], status: 'ga',
+    equipment: { v1: ['apollo'], v2: ['zlogs'] }, note: 'Apollo ELD hardware on Ignition v1.0 (Geo79-certified), or ZLogs on Ignition v2.0/GTC — both live today, no forced hardware swap at upgrade.' },
+  { id: 'eld-canada', group: 'Compliance and inspections', label: 'ELD compliance — Canada', description: 'Electronic logging device requirements for Canadian fleets.', platforms: ['v1', 'v2'], status: 'ga',
+    equipment: { v1: ['apollo'], v2: ['zlogs'] }, note: 'Apollo (v1.0) available now; ZLogs (v2.0/GTC) approved on the Transport Canada registry as of 7/17 (ComDriver recertification).' },
+  { id: 'evir', group: 'Compliance and inspections', label: 'Vehicle inspection reporting (EVIR)', description: 'Driver vehicle inspection reports, handhelds, or EVIR Mobile.', platforms: ['v2'], status: 'ga',
+    equipment: { v2: ['handhelds', 'tablets', 'evirmobile'] }, note: 'Live on GTC / Ignition v2.0 today. No net-new support on Ignition v1.0.' },
+
+  { id: 'video-standard', group: 'Video', label: 'Standard fleet video (available today)', description: 'Camera footage and event review on a proven, live product.', platforms: ['v1', 'v2'], status: 'ga',
+    equipment: { v1: ['vidfleet'], v2: ['coach'] }, note: 'VidFleet (Waylens) on Ignition v1.0, or Coach (MiTac + LightMetrics) on GTC(x) — pick based on which platform the customer is already on.' },
+  { id: 'video-unified', group: 'Video', label: 'Unified video + Driver Performance', description: 'One screen for video and driver scoring, not two separate products.', platforms: ['v2'], status: 'beta',
+    equipment: { v2: ['coach'] }, note: 'Only available at Ignition v2.0, and only in early adoption with MasTec — not GA yet. Driver Performance is not GA on v1.0.' },
+
+  { id: 'mobile-app', group: 'Mobile and AI', label: 'Driver mobile app', description: 'Login, asset association, and the Driver Performance widget on a phone.', platforms: ['v2'], status: 'beta',
+    equipment: { v2: ['mobileapp'] }, note: 'In beta now (MasTec anchor customer). Ships with the Ignition v2.0 launch; app GA follows separately.' },
+  { id: 'neurion', group: 'Mobile and AI', label: 'AI assistant for product knowledge', description: 'Ask questions in plain language and get routed to the right answer.', platforms: ['v1'], status: 'beta',
+    equipment: { v1: ['neurion'] }, note: 'Neurion Knowledge Base agent is in beta on Ignition v1.0 today, for selected users. Ignition v2.0 Knowledge Base, Fleet, and Insights agents are on the roadmap.' },
+  { id: 'deviceless', group: 'Mobile and AI', label: 'OEM / deviceless telematics', description: 'Connected-vehicle data straight from the OEM — no aftermarket TCU install.', platforms: ['v1'], status: 'ga',
+    equipment: { v1: ['deviceless'] }, note: 'Deviceless Telematics (formerly CerebrumX) is live in Ignition Core (v1.0) today. The Ignition v2.0 version is early-stage, sequencing pending the architecture decision.' },
+
+  { id: 'light-duty', group: 'Hardware', label: 'Light-duty vehicle telematics', description: 'Tracking for light-duty vehicles rather than a full TCU install.', platforms: ['v1', 'v2'], status: 'ga',
+    equipment: { v1: ['geometris'], v2: ['zonarld'] }, note: "Geometris Plug'n'Play on Ignition v1.0, or Zonar LD (a GTC product) on GTC / Ignition v2.0." },
+];
+
+const state = { mode: 'needs', query: '', activeFilter: 'all', selected: new Set(), selectedNeeds: new Set() };
 
 const CATEGORIES = ['all', ...Array.from(new Set(ITEMS.map(i => i.category)))];
 
 function norm(s) { return s.toLowerCase().trim(); }
+function itemName(id) { const item = ITEMS.find(i => i.id === id); return item ? item.name : id; }
+function statusLabel(status) { return status === 'ga' ? 'Live now' : 'Beta — not GA'; }
 
 // Splits "VidFleet, Apollo" / "VidFleet and Apollo" / "VidFleet + Apollo" into separate search terms.
 function splitTerms(query) {
@@ -482,6 +621,14 @@ function matchesQuery(item, query) {
   const terms = splitTerms(query);
   if (terms.length === 0) return true;
   return terms.some(t => matchesTerm(item, t));
+}
+
+function renderModeTabs() {
+  document.querySelectorAll('.mode-tab').forEach(btn => {
+    btn.setAttribute('aria-pressed', String(btn.dataset.mode === state.mode));
+  });
+  document.getElementById('needsPanel').style.display = state.mode === 'needs' ? 'block' : 'none';
+  document.getElementById('equipmentPanel').style.display = state.mode === 'equipment' ? 'block' : 'none';
 }
 
 function renderFilters() {
@@ -563,7 +710,7 @@ function renderTray() {
   const titleEl = document.getElementById('trayTitle');
   const selectedItems = ITEMS.filter(i => state.selected.has(i.id));
 
-  if (selectedItems.length === 0) {
+  if (state.mode !== 'equipment' || selectedItems.length === 0) {
     tray.classList.remove('visible');
     return;
   }
@@ -584,7 +731,7 @@ function renderTray() {
 
   verdictEl.className = 'verdict';
   if (selectedItems.length === 1) {
-    verdictEl.classList.add('verdict-ambiguous');
+    verdictEl.classList.add('verdict-compatible');
     verdictEl.innerHTML = `<span class="verdict-icon">ℹ️</span><span class="verdict-text">Add a second item to check whether they work on the same platform.</span>`;
     return;
   }
@@ -646,13 +793,100 @@ function renderQuickCompare() {
   container.innerHTML = html;
 }
 
+function renderNeeds() {
+  const el = document.getElementById('needsList');
+  el.innerHTML = '';
+  let lastGroup = null;
+  NEEDS.forEach(need => {
+    if (need.group !== lastGroup) {
+      const groupLabel = document.createElement('div');
+      groupLabel.className = 'needs-group-label';
+      groupLabel.textContent = need.group;
+      el.appendChild(groupLabel);
+      lastGroup = need.group;
+    }
+    const selected = state.selectedNeeds.has(need.id);
+    const card = document.createElement('button');
+    card.type = 'button';
+    card.className = 'need-card';
+    card.setAttribute('aria-pressed', String(selected));
+    card.innerHTML = `
+      <span class="need-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+      <span class="need-content">
+        <span class="need-label-row">
+          <span class="need-label">${need.label}</span>
+          <span class="status-badge status-${need.status}">${statusLabel(need.status)}</span>
+          ${need.platforms.map(p => `<span class="badge badge-${p}">${PLATFORM_LABEL[p]}</span>`).join('')}
+        </span>
+        <span class="need-description">${need.description}</span>
+      </span>
+    `;
+    card.addEventListener('click', () => {
+      if (state.selectedNeeds.has(need.id)) state.selectedNeeds.delete(need.id);
+      else state.selectedNeeds.add(need.id);
+      render();
+    });
+    el.appendChild(card);
+  });
+}
+
+function renderNeedsRecommendation() {
+  const container = document.getElementById('needsRecommendation');
+  const selected = NEEDS.filter(n => state.selectedNeeds.has(n.id));
+
+  if (selected.length === 0) {
+    container.style.display = 'none';
+    container.innerHTML = '';
+    return;
+  }
+
+  const commonPlatforms = ['v1', 'v2'].filter(p => selected.every(n => n.platforms.includes(p)));
+  const hasConflict = commonPlatforms.length === 0;
+
+  let headline;
+  if (hasConflict) {
+    headline = `<div class="verdict verdict-incompatible"><span class="verdict-icon">⚠️</span><span class="verdict-text"><b>No single platform covers everything selected.</b> See the breakdown below for which need is forcing which side.</span></div>`;
+  } else if (commonPlatforms.length === 2) {
+    headline = `<div class="verdict verdict-compatible"><span class="verdict-icon">✅</span><span class="verdict-text">Either platform works — <b>Ignition v1.0</b> or <b>Ignition v2.0 / GTC</b> cover everything selected.</span></div>`;
+  } else {
+    headline = `<div class="verdict verdict-compatible"><span class="verdict-icon">✅</span><span class="verdict-text">Recommended platform: <b>${PLATFORM_LABEL[commonPlatforms[0]]}</b> — it covers everything selected.</span></div>`;
+  }
+
+  const breakdown = selected.map(need => {
+    const effectivePlatforms = hasConflict ? need.platforms : need.platforms.filter(p => commonPlatforms.includes(p));
+    const platformLines = effectivePlatforms.map(p => {
+      const equip = (need.equipment[p] || []).map(itemName).join(', ');
+      return `<div class="need-breakdown-platform"><span class="badge badge-${p}">${PLATFORM_LABEL[p]}</span>${equip ? `<span class="need-breakdown-equipment">${equip}</span>` : ''}</div>`;
+    }).join('');
+    return `
+      <div class="need-breakdown">
+        <div class="need-breakdown-head">
+          <span class="need-breakdown-label">${need.label}</span>
+          <span class="status-badge status-${need.status}">${statusLabel(need.status)}</span>
+        </div>
+        ${platformLines}
+        <div class="need-breakdown-note">${need.note}</div>
+      </div>
+    `;
+  }).join('');
+
+  container.style.display = 'block';
+  container.innerHTML = headline + `<div class="needs-breakdown-list">${breakdown}</div>`;
+}
+
 function render() {
+  renderModeTabs();
+  renderNeeds();
+  renderNeedsRecommendation();
   renderFilters();
   renderResults();
   renderTray();
   renderQuickCompare();
 }
 
+document.querySelectorAll('.mode-tab').forEach(btn => {
+  btn.addEventListener('click', () => { state.mode = btn.dataset.mode; render(); });
+});
 document.getElementById('search').addEventListener('input', (e) => { state.query = e.target.value; render(); });
 document.getElementById('clearAll').addEventListener('click', () => { state.selected.clear(); render(); });
 
