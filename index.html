@@ -140,7 +140,7 @@
   .tag-sw { background: var(--power-purple-soft); color: var(--power-purple); }
   .category { font-size: 14pt; font-weight: 300; color: var(--text-secondary); margin-bottom: 8px; }
   .platform-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
-  .badge { font-size: 14pt; font-weight: 700; padding: 4px 11px; border-radius: 6px; }
+  .badge { font-size: 14pt; font-weight: 700; padding: 4px 11px; border-radius: 6px; white-space: nowrap; display: inline-block; }
   .badge-v1 { background: var(--precision-blue); color: #FFFFFF; }
   .badge-v2 { background: var(--true-blue); color: var(--text-primary); }
   .badge-existing { background: var(--bg); color: var(--text-secondary); border: 1.5px solid var(--border); font-weight: 500; }
@@ -156,12 +156,14 @@
   details.full-table summary::before { content: "▸ "; color: var(--action-blue); }
   details.full-table[open] summary::before { content: "▾ "; }
   .table-scroll { overflow-x: auto; padding: 0 18px 18px; }
-  table { width: 100%; border-collapse: collapse; font-size: 14pt; }
-  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
-  th { color: var(--text-secondary); font-weight: 500; white-space: nowrap; }
+  table { width: max-content; min-width: 100%; border-collapse: collapse; font-size: 14pt; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; white-space: nowrap; }
+  th { color: var(--text-secondary); font-weight: 500; }
   td { font-weight: 400; color: var(--text-primary); }
-  td.name-cell { font-weight: 500; white-space: nowrap; }
+  td.name-cell { font-weight: 500; }
+  #fullTable td:last-child, #fullTable th:last-child { white-space: normal; min-width: 280px; max-width: 420px; }
   .ref-table td, .ref-table th { white-space: normal; }
+  .ref-table td:first-child, .ref-table th:first-child { min-width: 160px; }
 
   footer.disclaimer { margin-top: 34px; font-size: 14pt; font-weight: 300; color: var(--text-primary); border-top: 1.5px solid var(--border); padding-top: 18px; }
   footer.disclaimer p { margin: 0 0 8px; }
