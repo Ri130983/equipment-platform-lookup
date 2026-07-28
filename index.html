@@ -262,7 +262,7 @@
   </details>
 
   <footer class="disclaimer">
-    <p><strong>Source:</strong> Zonar Product Strategy — Sales Enablement Field Guide (Product Management, working draft, July 2026), which consolidates the Hardware Compatibility Matrix, Feature Release Status, and What Not To Sell guardrails — plus the Jul 21 2026 Product and Sales Sync deck for context not yet folded into the field guide.</p>
+    <p><strong>Source:</strong> hardware and platform status is synced from the live Confluence <a href="https://zonarsystems.atlassian.net/wiki/spaces/PROD/pages/140186943651/Hardware+Compatibility+Matrix+Currently+Offered+Products">Hardware Compatibility Matrix — Currently Offered Products</a> (Product Management, itself marked draft/in-progress). Software solutions, guardrails, and ICP are from the Sales Enablement Field Guide and the Jul 21 2026 Product and Sales Sync deck.</p>
     <p>Ignition v2.0 and GTC/GTCx share the same backend, so they're treated as one platform here. Ignition v1.0 runs on a separate (PX) backend. Items marked ⚑ Needs confirmation are pending sign-off from the hardware owner or Product Marketing — confirm before using with a customer.</p>
     <p>For anything not listed, check with the relevant PM: Bryant Maxey (ELD, EVIR, tablet and camera hardware), Devin Meadows (Ignition platform, video), Tatiana Badiceanu (AI products, CARB/emissions, integrations), or Terry Harleman (Zonar mobile app).</p>
   </footer>
@@ -283,53 +283,119 @@
 const PLATFORM_LABEL = { v1: 'Ignition v1.0', v2: 'Ignition v2.0 / GTC' };
 
 const ITEMS = [
-  // --- TCU / telematics hardware ---
+  // --- TCU / telematics hardware (current Zonar) ---
   { id: 'v4tcu', name: 'V4 TCU (V4E-NBT)', aliases: ['v4', 'v4e-nbt', 'telematics control unit', 'tcu'], category: 'TCU / telematics hardware', sourceTag: 'hw',
     platforms: ['v2'], existingOnly: ['v1'],
     notes: 'Primary v2.0 TCU. Light + heavy duty; full ECU protocols (J1708/1587, J1979, J1939); runs ZLogs ELD; the direction for camera-as-TCU. Still supported (serviced) on Ignition v1.0, but not sold new there.' },
   { id: 'v4r', name: 'V4R (rugged TCU)', aliases: ['v4r', 'rugged tcu'], category: 'TCU / telematics hardware', sourceTag: 'hw',
     platforms: ['v2'], existingOnly: ['v1'],
-    notes: 'Rugged variant of the V4 — IP67/IP69K, extreme temperature, off-road duty. Same v1.0/v2.0 status as the standard V4.' },
-  { id: 'zonarld', name: "Zonar LD (light-duty TCU)", aliases: ['zonar ld', 'ld25', 'ld tcu', 'light duty'], category: 'TCU / telematics hardware', sourceTag: 'hw',
-    platforms: ['v2'], confirm: true,
-    notes: "Light-duty OBD-II plug-and-play; supports EV/hybrid. A GTC (v2.0) product — v1.0 status is still pending hardware-owner confirmation." },
-  { id: 'geometris', name: "Geometris Plug'n'Play", aliases: ['geometris', "plug'n'play", 'geo 87', 'geo 88', 'geo 68', 'geo 96', 'geo 87z', 'light-duty tcu'], category: 'TCU / telematics hardware', sourceTag: 'hw',
+    notes: 'Rugged variant of the V4 — IP67/IP69K, extreme temperature, off-road / dirt-mud-ice duty. Same v1.0/v2.0 status as the standard V4.' },
+  { id: 'zonarld', name: "Zonar LD (LD25-V01, light-duty TCU)", aliases: ['zonar ld', 'ld25', 'ld tcu', 'light duty'], category: 'TCU / telematics hardware', sourceTag: 'hw',
+    platforms: ['v2'], existingOnly: ['v1'], confirm: true,
+    notes: "Light-duty OBD-II plug-and-play; 2008+ gas/diesel, many EV/hybrid (J1979-2). A GTC product, and also supported (serviced) on Ignition v1.0 — but v1.0 support status is still pending hardware-owner confirmation." },
+
+  // --- Geometris light-duty family (v1.0 only) ---
+  { id: 'geo8788', name: 'Geo 87 / 88 (Geometris)', aliases: ['geo 87', 'geo 88', 'geometris 87', 'geometris 88', 'light-duty tcu'], category: 'TCU / telematics hardware', sourceTag: 'hw',
     platforms: ['v1'],
-    notes: 'Geo family (87/88, 79, 68, 96, 87Z) — v1.0 light-duty OBD-II plug-and-play. Pairs with Apollo ELD; Geo 87Z is required for Canada ELD.' },
-  { id: 'calamp', name: 'CalAmp LMU / GV50', aliases: ['calamp', 'lmu', 'gv50', 'lmu 2630', 'lmu 3040'], category: 'TCU / telematics hardware', sourceTag: 'hw',
+    notes: "Light-duty, Plug & Play OBD-II; CAT-M, 5G-capable; ELD-ready with BLE driver-ID key fob; J1708/1587 on the 87 only. Pairs with Apollo ELD. Also a GPS Trackit SKU." },
+  { id: 'geo79', name: 'Geo 79 (Geometris)', aliases: ['geo 79', 'geometris 79'], category: 'TCU / telematics hardware', sourceTag: 'hw',
     platforms: ['v1'],
-    notes: 'Legacy GPS Trackit wired TCU options. LMU 3040 is end-of-sale.' },
+    notes: '2 digital outputs; starter disable; temperature sensor. Future Apollo ELD + Thermo King integration planned.' },
+  { id: 'geo68', name: 'Geo 68 (Geometris)', aliases: ['geo 68', 'geometris 68'], category: 'TCU / telematics hardware', sourceTag: 'hw',
+    platforms: ['v1'],
+    notes: 'Wired; J1979; BLE; internal battery/antennas; locking connector.' },
+  { id: 'geo96', name: 'Geo 96 (Geometris)', aliases: ['geo 96', 'geometris 96'], category: 'TCU / telematics hardware', sourceTag: 'hw',
+    platforms: ['v1'],
+    notes: 'Plug & Play; buzzer; BLE driver ID. A GPS Trackit SKU.' },
+  { id: 'geo87z', name: 'Geo 87Z (Geometris)', aliases: ['geo 87z', 'geometris 87z', 'canada eld hardware'], category: 'TCU / telematics hardware', sourceTag: 'hw',
+    platforms: ['v1'],
+    notes: 'Special order. Required for Canada ELD on Apollo. A GPS Trackit SKU.' },
+
+  // --- Legacy CalAmp / GPS Trackit TCUs (v1.0 only, all confirm-worthy per source) ---
+  { id: 'lmu2630', name: 'LMU 2630 (CalAmp)', aliases: ['lmu 2630', 'calamp 2630'], category: 'TCU / telematics hardware', sourceTag: 'hw',
+    platforms: ['v1'],
+    notes: 'Wired; add-on / alternative device. GPS Trackit legacy (P4 / PX / TSO).' },
+  { id: 'lmu3030', name: 'LMU 3030 (CalAmp)', aliases: ['lmu 3030', 'calamp 3030'], category: 'TCU / telematics hardware', sourceTag: 'hw',
+    platforms: ['v1'],
+    notes: 'Wired; CAT-1. GPS Trackit legacy.' },
+  { id: 'lmu3035', name: 'LMU 3035 (CalAmp)', aliases: ['lmu 3035', 'calamp 3035'], category: 'TCU / telematics hardware', sourceTag: 'hw',
+    platforms: ['v1'],
+    notes: 'Wired. GPS Trackit legacy.' },
+  { id: 'lmu3040', name: 'LMU 3040 (CalAmp)', aliases: ['lmu 3040', 'calamp 3040'], category: 'TCU / telematics hardware', sourceTag: 'hw',
+    platforms: [], existingOnly: [], saleStatus: 'eol', confirm: true,
+    notes: 'CAT-1. End of sale. The source catalog contradicts itself here (listed as both an add-on and "legacy, supported not sold") — confirm actual offered-vs-supported status on v1.0 before quoting either way.' },
+  { id: 'lmu3640', name: 'LMU 3640 (CalAmp)', aliases: ['lmu 3640', 'calamp 3640'], category: 'TCU / telematics hardware', sourceTag: 'hw',
+    platforms: ['v1'],
+    notes: "Wired ELD with I/O's plus CANBUS reading. Use only when ELD and I/O's are both needed together. GPS Trackit legacy." },
+  { id: 'gv50', name: 'GV50 (Geometris)', aliases: ['gv50'], category: 'TCU / telematics hardware', sourceTag: 'hw',
+    platforms: ['v1'],
+    notes: 'Wired / CAT-M; trailer / powered-equipment use. GPS Trackit legacy.' },
+  { id: 'veosphere', name: 'Veosphere', aliases: ['veosphere'], category: 'TCU / telematics hardware', sourceTag: 'hw',
+    platforms: [], existingOnly: ['v1'], confirm: true,
+    notes: 'Listed in the GPS Trackit catalog; spec and v1.0 availability/status still need confirmation. Not offered or supported on v2.0/GTC.' },
 
   // --- Asset trackers ---
   { id: 'ztrak', name: 'ZTrak AT22 (asset tracker)', aliases: ['ztrak', 'at22', 'asset tracker'], category: 'Asset tracker', sourceTag: 'hw',
-    platforms: ['v1', 'v2'],
-    notes: 'Up to 10-year field-replaceable battery; motion-based; IP67.' },
-  { id: 'solartrackers', name: 'TLP2 Solar / TTU / GL500MG / SmartOne', aliases: ['tlp2', 'solar tracker', 'smartone', 'gl500mg', 'ttu', 'satellite tracker'], category: 'Asset tracker', sourceTag: 'hw',
+    platforms: ['v1', 'v2'], confirm: true,
+    notes: 'Up to 10-year field-replaceable battery; motion-based; IP67. Also a GPS Trackit SKU. Currently offered, but which Ignition version(s) is still unconfirmed; "Rapid Response" feature has been removed.' },
+  { id: '4gztrak', name: '4G ZTRAK (asset tracker)', aliases: ['4g ztrak', 'ztrak 4g'], category: 'Asset tracker', sourceTag: 'hw',
+    platforms: [], saleStatus: 'eol', confirm: true,
+    notes: 'Prior-generation ZTRAK (still in the price book). End of sale. Confirm whether it is still offered alongside AT22, and on which version(s).' },
+  { id: 'tlp2solar', name: 'TLP2 Solar (asset tracker)', aliases: ['tlp2', 'tlp2 solar', 'solar tracker'], category: 'Asset tracker', sourceTag: 'hw',
     platforms: ['v1'], confirm: true,
-    notes: 'Solar, battery, and satellite (SmartOne, global coverage) options for trailers and equipment. Most are v1.0 / GPS Trackit SKUs; several v1.0/v2.0 mappings are still pending confirmation.' },
+    notes: 'Solar-powered; IP67; rugged; no wiring required. Also a GPS Trackit SKU. Offered — v1.0 mapping still needs confirmation.' },
+  { id: 'ttu2830', name: 'TTU 2830 (asset tracker)', aliases: ['ttu 2830', 'ttu2830'], category: 'Asset tracker', sourceTag: 'hw',
+    platforms: ['v1'], confirm: true,
+    notes: 'CalAmp; battery; IP66; CAT-M; 3-wire; trailer / heavy equipment. Also a GPS Trackit SKU. Offered — v1.0 mapping still needs confirmation.' },
+  { id: 'ttu730', name: 'TTU 730 (asset tracker)', aliases: ['ttu 730', 'ttu730'], category: 'Asset tracker', sourceTag: 'hw',
+    platforms: [], confirm: true,
+    notes: 'CalAmp; battery-powered, non-powered-asset tracker. Legacy device — its own offered/supported status is unconfirmed. GPS Trackit legacy.' },
+  { id: 'gl500mg', name: 'GL500MG (asset tracker)', aliases: ['gl500mg', 'gl500'], category: 'Asset tracker', sourceTag: 'hw',
+    platforms: ['v1'],
+    notes: 'CalAmp; battery / CAT-M; no-motion; 5-year battery at 1 ping/day; field-replaceable battery. GPS Trackit legacy.' },
+  { id: 'smartonec', name: 'SmartOne C (asset tracker)', aliases: ['smartone c', 'smartone'], category: 'Asset tracker', sourceTag: 'hw',
+    platforms: ['v1'],
+    notes: 'Satellite; global coverage; US Cellular / TOPS. Cannot go on Seasonal Pause. GPS Trackit legacy.' },
+  { id: 'smartonesolar', name: 'SmartOne Solar (asset tracker)', aliases: ['smartone solar'], category: 'Asset tracker', sourceTag: 'hw',
+    platforms: ['v1'],
+    notes: 'Satellite / solar; intrinsically safe; global coverage. GPS Trackit legacy.' },
 
-  // --- Tablet ---
-  { id: 'tablets', name: 'Managed tablets (Samsung Tab Active5 / MioWORK F840)', aliases: ['tab active5', 'miowork f840', 'managed tablet', 'tablet'], category: 'Tablet', sourceTag: 'hw',
-    platforms: ['v2'],
-    notes: 'Samsung Tab Active5 (Android 14) or MioWORK F840 (Android 13); runs the Zonar Mobile App + EVIR. v2.0 preferred, though the app experience on it is still not GA. The V4 is not suitable for managed tablets — never position it that way.' },
+  // --- Tablets, handsets ---
+  { id: 'tabletta5', name: 'Managed tablet — Samsung Tab Active5', aliases: ['tab active5', 'ta5', 'managed tablet', 'tablet'], category: 'Tablet', sourceTag: 'hw',
+    platforms: ['v2'], existingOnly: ['v1'],
+    notes: 'Android 14; Zonar Mobile Shield; runs the Zonar Mobile App + EVIR. v2.0 preferred, though the app experience on it is still not GA. The V4 is not suitable for managed tablets.' },
+  { id: 'tabletf840', name: 'Managed tablet — MioWORK F840', aliases: ['miowork f840', 'f840', 'managed tablet'], category: 'Tablet', sourceTag: 'hw',
+    platforms: ['v2'], existingOnly: ['v1'],
+    notes: 'Android 13; multi-channel video vehicle cradle; runs the Zonar Mobile App + EVIR. v2.0 preferred, not GA yet.' },
+  { id: 'samsunga16', name: 'Samsung Galaxy A16 (handset)', aliases: ['samsung a16', 'galaxy a16', 'handset'], category: 'Handset', sourceTag: 'hw',
+    platforms: ['v2'], existingOnly: ['v1'], confirm: true,
+    notes: 'Handset option (AT&T / Verizon kits), currently exclusive to 2 customers. Platform mapping and general use case still need research.' },
 
   // --- EVIR ---
   { id: 'handhelds', name: '2010 handhelds', aliases: ['2010 handheld', 'handheld', 'zonar 2010'], category: 'EVIR hardware', sourceTag: 'hw',
-    platforms: ['v2'], existingOnly: ['v1'],
-    notes: 'EVIR inspection handheld + reader station.' },
+    platforms: ['v2'], existingOnly: ['v1'], confirm: true,
+    notes: 'EVIR inspection handheld + reader/download station. Exact Ignition version mapping still needs confirmation.' },
   { id: 'evirmobile', name: 'EVIR mobile', aliases: ['evir mobile', 'byod evir'], category: 'EVIR software', sourceTag: 'hw',
     platforms: ['v2'],
     notes: 'BYOD or managed tablets, on GTC / Ignition v2.0. Electronic inspection with full parity delivered inside Ignition.' },
 
   // --- Student transportation ---
   { id: 'zpass', name: 'ZPass / ZPass SRT', aliases: ['zpass', 'z pass', 'student rfid'], category: 'Student transportation', sourceTag: 'hw',
-    platforms: ['v2'],
-    notes: 'Student RFID ridership tracking for Pupil / Bus Suite.' },
+    platforms: ['v2'], existingOnly: ['v1'], confirm: true,
+    notes: 'Student RFID ridership tracking for Pupil / Bus Suite. Still supported on v1.0 but with reduced functionality there. Exact Ignition mapping needs confirmation.' },
 
-  // --- TPMS ---
+  // --- TPMS / diagnostics (both flagged — source is self-contradictory) ---
   { id: 'conticonnect', name: 'ContiConnect TPMS', aliases: ['conticonnect', 'tpms', 'tire pressure'], category: 'TPMS', sourceTag: 'hw',
-    platforms: ['v2'],
-    notes: 'Tire-pressure monitoring system — a net-new category for Zonar.' },
+    platforms: [], confirm: true,
+    notes: "Continental tire-pressure monitoring (Live Kit, CPC Display, Control Unit, sensors) — a net-new category. The source catalog is self-contradictory: its own note calls this \"Offered,\" but the v2.0 status cell says \"End of sale,\" and v1.0 is not supported or offered at all. Do not position this to a customer until the hardware owner resolves which is correct." },
+  { id: 'connectkit', name: 'Connect Kit / DTNA Connect (diagnostic)', aliases: ['connect kit', 'dtna connect', 'ccm ep2plus'], category: 'Diagnostic', sourceTag: 'hw',
+    platforms: [], confirm: true,
+    notes: 'Detroit / DTNA Connect diagnostic kits, including CCM EP2plus + Zonar V3/V4 bundles. Same contradiction as ContiConnect: the note calls this "Offered," but the v2.0 status cell says "End of Life," and it is not supported or offered on v1.0. Needs research and hardware-owner confirmation before selling.' },
+
+  // --- Kiosk display ---
+  { id: 'bytecurve', name: 'ByteCurve Screen (kiosk display)', aliases: ['bytecurve', 'kiosk display'], category: 'Kiosk display', sourceTag: 'hw',
+    platforms: [], confirm: true,
+    notes: 'Driver-workflow kiosk display. Listed as offered, but its Ignition platform mapping still needs research — treat as unconfirmed until resolved.' },
 
   // --- ELD ---
   { id: 'apollo', name: 'Apollo ELD hardware (Geometris)', aliases: ['apollo', 'apollo eld', 'geo79'], category: 'ELD', sourceTag: 'hw',
@@ -341,26 +407,32 @@ const ITEMS = [
 
   // --- Cameras ---
   { id: 'coach', name: 'Zonar DashCam / Coach (MiTac + LightMetrics)', aliases: ['coach', 'dashcam', 'mitac', 'lightmetrics', 'ff22', 'df22', 'df12'], category: 'Camera', sourceTag: 'hw',
-    platforms: ['v2'],
-    notes: 'Models range from entry (DF12) to enterprise (FF22/DF22), plus DF24/FF25/DF32 and dual-facing configs. Feeds Driver Performance; single-pane-of-glass at v2.0 is early adoption.' },
+    platforms: ['v2'], confirm: true,
+    notes: 'Models range from entry (DF12) to enterprise (FF22/DF22), plus DF24/FF25/DF32 and dual-facing configs. Feeds Driver Performance; single-pane-of-glass at v2.0 is early adoption. The source catalog flags a v1.0 caveat around Driver Performance and "general request video failures" that needs clarification — do not position Coach as running on v1.0 until that\'s resolved.' },
   { id: 'dashcamaux', name: 'Zonar DashCam aux camera', aliases: ['aux camera', 'tvi sc25', 'rc25', 'ec24'], category: 'Camera', sourceTag: 'hw',
     platforms: ['v2'],
-    notes: 'Side/rear accessory (TVI SC25/RC25, USB EC24); 120° FOV; IP69K; connects via USB.' },
+    notes: 'Side/rear accessory (TVI SC25/RC25, USB EC24); 120° FOV; IP69K; connects via USB. A v1.0 variant is listed as "validate / not GA" — treat as not available on v1.0 for now.' },
   { id: 'vidfleet', name: 'VidFleet Air I / II', aliases: ['vidfleet', 'waylens', 'air 1', 'air 2'], category: 'Camera', sourceTag: 'hw',
     platforms: ['v1'],
-    notes: 'Waylens 360° coverage (forward, driver, sides). Expansion offerings under evaluation.' },
+    notes: 'Waylens 360° coverage (forward, driver, sides). Expansion offerings under evaluation. Also a GPS Trackit SKU (AIR 1 / AIR 2).' },
   { id: 'vidfleetaux', name: 'VidFleet external / aux camera', aliases: ['vidfleet aux', 'external camera'], category: 'Camera', sourceTag: 'hw',
     platforms: ['v1'],
     notes: 'Up to 2 external cameras (rear/side/compartment); up to 45 ft extension.' },
   { id: 'vidfleetone', name: 'VidFleet One', aliases: ['vidfleet one'], category: 'Camera', sourceTag: 'hw',
-    platforms: ['v1'],
-    notes: 'Road + driver, 1 channel, no AI; simplified camera-as-GPS install (no separate telematics device required).' },
+    platforms: [], existingOnly: ['v1'], saleStatus: 'eol',
+    notes: 'Road + driver, 1 channel, no AI; simplified camera-as-GPS install. End of sale — do not sell. (Corrected: earlier guidance had this as active; the live hardware matrix marks it end of sale, same as VidFleet AI+.)' },
   { id: 'vidfleetaiplus', name: 'VidFleet AI+', aliases: ['vidfleet ai+', 'ai plus'], category: 'Camera', sourceTag: 'hw',
     platforms: [], existingOnly: ['v1'], saleStatus: 'eol',
     notes: 'End of Sale (Q1 2025); EOL announced 1/6/2025. Do not sell — still serviced for existing customers.' },
-  { id: 'sensata', name: 'Sensata KP2 / CP4 / CP2', aliases: ['sensata', 'kp2', 'cp4', 'cp2'], category: 'Camera', sourceTag: 'hw',
+  { id: 'sensatakp2', name: 'Sensata KP2 (Xirgo)', aliases: ['sensata kp2', 'kp2', 'xirgo kp2'], category: 'Camera', sourceTag: 'hw',
     platforms: [], saleStatus: 'legacy',
-    notes: 'Serviceable DVR option on the legacy P4 platform only — no AI, no live stream. Not on Ignition (pre-Ignition, not strategic); CP2 is superseded by KP2.' },
+    notes: 'DVR, forward + driver; no AI, no live stream; replaced CP2. On the legacy P4 platform only (pre-Ignition), not on Ignition — currently offered on P4.' },
+  { id: 'sensatacp4', name: 'Sensata CP4 (Xirgo)', aliases: ['sensata cp4', 'cp4', 'xirgo cp4'], category: 'Camera', sourceTag: 'hw',
+    platforms: [], saleStatus: 'legacy',
+    notes: 'DVR, 4-camera. On the legacy P4 platform only (pre-Ignition), not on Ignition — currently offered on P4.' },
+  { id: 'sensatacp2', name: 'Sensata CP2 (Xirgo)', aliases: ['sensata cp2', 'cp2', 'xirgo cp2'], category: 'Camera', sourceTag: 'hw',
+    platforms: [], saleStatus: 'legacy', confirm: true,
+    notes: 'DVR, dual-channel / CAT-4; superseded by KP2. On the legacy P4 platform only (pre-Ignition). Confirm whether still orderable.' },
 
   // --- Software solutions ---
   { id: 'ignitionplatform', name: 'Zonar Ignition (platform)', aliases: ['ignition', 'zonar-one', 'zonar one'], category: 'Software', sourceTag: 'sw',
@@ -403,17 +475,17 @@ const NEEDS = [
   { id: 'eld-us', group: 'Compliance and inspections', label: 'ELD compliance — US', description: 'Electronic logging device requirements for US fleets.', platforms: ['v1', 'v2'], status: 'ga',
     equipment: { v1: ['apollo'], v2: ['zlogs'] }, note: 'Apollo ELD hardware on Ignition v1.0 (Geo79-certified), or ZLogs on Ignition v2.0/GTC — both live today, no forced hardware swap at upgrade.' },
   { id: 'eld-canada', group: 'Compliance and inspections', label: 'ELD compliance — Canada', description: 'Electronic logging device requirements for Canadian fleets.', platforms: ['v1', 'v2'], status: 'ga',
-    equipment: { v1: ['apollo'], v2: ['zlogs'] }, note: 'Apollo (v1.0, requires Geo 87Z) available now; ZLogs (v2.0/GTC) approved on the Transport Canada registry as of 7/17 — qualified/RFP conversations only until Marketing signs off.' },
+    equipment: { v1: ['apollo', 'geo87z'], v2: ['zlogs'] }, note: 'Apollo (v1.0) requires the Geo 87Z special-order hardware for Canada; ZLogs (v2.0/GTC) approved on the Transport Canada registry as of 7/17 — qualified/RFP conversations only until Marketing signs off.' },
   { id: 'evir', group: 'Compliance and inspections', label: 'Vehicle inspection reporting (EVIR)', description: 'Driver vehicle inspection reports, handhelds, or EVIR Mobile.', platforms: ['v2'], status: 'ga',
-    equipment: { v2: ['handhelds', 'tablets', 'evirmobile'] }, note: 'Live on GTC / Ignition v2.0 today (2010 handhelds, managed tablets, EVIR Mobile). No net-new support on Ignition v1.0.' },
+    equipment: { v2: ['handhelds', 'tabletta5', 'tabletf840', 'evirmobile'] }, note: 'Live on GTC / Ignition v2.0 today (2010 handhelds, managed tablets, EVIR Mobile). No net-new support on Ignition v1.0.' },
 
   { id: 'video-standard', group: 'Video', label: 'Standard fleet video (available today)', description: 'Camera footage and event review on a proven, live product.', platforms: ['v1', 'v2'], status: 'ga',
-    equipment: { v1: ['vidfleet'], v2: ['coach'] }, note: 'VidFleet (Waylens) on Ignition v1.0, or Coach (MiTac + LightMetrics) on GTC(x) — pick based on which platform the customer is already on. Not VidFleet AI+ (end of sale).' },
+    equipment: { v1: ['vidfleet'], v2: ['coach'] }, note: 'VidFleet Air I/II (Waylens) on Ignition v1.0, or Coach (MiTac + LightMetrics) on GTC(x) — pick based on which platform the customer is already on. Not VidFleet One or VidFleet AI+ (both end of sale).' },
   { id: 'video-unified', group: 'Video', label: 'Unified video + Driver Performance', description: 'One screen for video and driver scoring, not two separate products.', platforms: ['v2'], status: 'beta',
     equipment: { v2: ['coach', 'driverperformance'] }, note: 'Only available at Ignition v2.0, and only in early adoption — not GA yet. Driver Performance itself is GA on GTC, but the single-pane-of-glass experience is early adoption.' },
 
   { id: 'managed-tablet-workflow', group: 'Mobile and AI', label: 'Managed-tablet in-cab workflow', description: 'EVIR, messaging, and ELD all running through a driver-facing tablet.', platforms: ['v2'], status: 'beta',
-    equipment: { v2: ['tablets', 'mobileapp'] }, note: 'v2.0 with a managed tablet (Tab Active5 or MioWORK F840) plus the Zonar Mobile App. The app is beta and ships with the 2.0 launch — do not sell as GA. Never position the V4 for tablets.' },
+    equipment: { v2: ['tabletta5', 'tabletf840', 'mobileapp'] }, note: 'v2.0 with a managed tablet (Tab Active5 or MioWORK F840) plus the Zonar Mobile App. The app is beta and ships with the 2.0 launch — do not sell as GA. Never position the V4 for tablets.' },
   { id: 'mobile-app', group: 'Mobile and AI', label: 'Driver mobile app', description: 'Login, asset association, and the Driver Performance widget on a phone.', platforms: ['v2'], status: 'beta',
     equipment: { v2: ['mobileapp'] }, note: 'In beta now (MasTec anchor customer). Ships with the Ignition v2.0 launch; app GA follows separately.' },
   { id: 'neurion', group: 'Mobile and AI', label: 'AI assistant for product knowledge', description: 'Ask questions in plain language and get routed to the right answer.', platforms: ['v1'], status: 'ga',
@@ -422,21 +494,21 @@ const NEEDS = [
     equipment: { v1: ['deviceless'] }, note: 'Live in Ignition Core (v1.0) today — real-time visibility, safety insights, diagnostics, EV reporting. The Ignition v2.0 version is early-stage, sequencing pending the architecture decision.' },
 
   { id: 'student-transportation', group: 'Student transportation', label: 'Student transportation (Bus Suite)', description: 'Routing, ridership, and field trips for pupil transportation fleets.', platforms: ['v1', 'v2'], status: 'ga',
-    equipment: { v1: ['bussuite'], v2: ['bussuite', 'zpass', 'evirmobile'] }, note: 'Bus Suite (Pupil / ZPass) runs on either platform; add EVIR and Driver Performance for a full compliance and safety story.' },
+    equipment: { v1: ['bussuite'], v2: ['bussuite', 'zpass', 'evirmobile'] }, note: 'Bus Suite (Pupil / ZPass) runs on either platform; add EVIR and Driver Performance for a full compliance and safety story. ZPass functionality is reduced on v1.0.' },
 
   { id: 'light-duty', group: 'Hardware and assets', label: 'Light-duty vehicle telematics', description: 'Tracking for light-duty vehicles rather than a full TCU install.', platforms: ['v1', 'v2'], status: 'ga',
-    equipment: { v1: ['geometris'], v2: ['zonarld'] }, note: "Geometris Plug'n'Play on Ignition v1.0, or Zonar LD (a GTC product) on GTC / Ignition v2.0." },
+    equipment: { v1: ['geo8788'], v2: ['zonarld'] }, note: "Geo 87/88 (Geometris) on Ignition v1.0 — or Geo 79/68/96/87Z for more specific needs (87Z for Canada ELD) — or Zonar LD (a GTC product) on GTC / Ignition v2.0." },
   { id: 'asset-tracking', group: 'Hardware and assets', label: 'Asset, trailer, and equipment tracking', description: 'Tracking non-powered assets, trailers, or equipment rather than vehicles.', platforms: ['v1', 'v2'], status: 'ga',
-    equipment: { v1: ['solartrackers', 'ztrak'], v2: ['ztrak'] }, note: 'Choose a powered vs. battery/solar tracker by power availability and ping needs; SmartOne for global/satellite coverage. Some v1.0/v2.0 mappings are still pending confirmation.' },
+    equipment: { v1: ['ztrak', 'tlp2solar', 'ttu2830', 'gl500mg', 'smartonec', 'smartonesolar'], v2: ['ztrak'] }, note: 'Choose a powered vs. battery/solar/satellite tracker by power availability and ping needs. Most non-ZTrak options are v1.0-only today, and several v1.0/v2.0 mappings are still pending confirmation.' },
 ];
 
 const GUARDRAILS = [
   { area: 'Platform', dont: 'Position Ignition v2.0 as GA, or quote multi-account / v1.0→v2.0 upgrade dates.', say: '"GTC and Ignition v1.0 are what we stand behind today; v2.0 is in hardening."' },
   { area: 'Mobile', dont: "Sell the Zonar Mobile App as GA — it's beta. Don't quote module names or dates, or a BYOD ELD timeline.", say: '"In beta with MasTec; ships with the Ignition 2.0 launch."' },
   { area: 'ELD', dont: 'Quote a Canadian ZLogs go-live date, make a broad Canada re-announcement, or sell new ELD on Ignition Core / PX.', say: '"US: ZLogs (v2.0/GTC) and Apollo (v1.0) live. Canada: approved 7/17; qualified/RFP conversations only until Marketing signs off."' },
-  { area: 'Video', dont: 'Commit to a single camera manufacturer or a Zonar-firmware GA date; quote video package tiers; go deep on SmartLink / camera-as-TCU.', say: '"VidFleet on v1.0, Coach on GTC; the camera path forward is under evaluation."' },
+  { area: 'Video', dont: 'Commit to a single camera manufacturer or a Zonar-firmware GA date; quote video package tiers; go deep on SmartLink / camera-as-TCU; sell VidFleet One or VidFleet AI+ (both end of sale).', say: '"VidFleet Air on v1.0, Coach on GTC; the camera path forward is under evaluation."' },
   { area: 'Naming', dont: 'Say "IgnitionX," "Driver App," "CerebrumX / Cerebral Max," or "GPS Trackit."', say: '"Zonar Ignition (v1.0 / v2.0); Zonar Mobile App." Deviceless telematics is an internal capability, not a customer-facing product name.' },
-  { area: 'Hardware', dont: 'Position the V4 for managed tablets, or promise rugged / next-gen hardware (V4 Base 2, V4R-D) as available.', say: '"Managed tablets run on v2.0; next-gen hardware is future/roadmap."' },
+  { area: 'Hardware', dont: 'Position the V4 for managed tablets, promise rugged / next-gen hardware (V4 Base 2, V4R-D) as available, or quote ContiConnect TPMS / Connect Kit-DTNA Connect as sellable — the source catalog itself is contradictory on both.', say: '"Managed tablets run on v2.0; next-gen hardware, ContiConnect, and Connect Kit are all pending confirmation."' },
   { area: 'Legacy', dont: 'Position P4 / TSO Mobile as strategic, or write net-new business on legacy platforms.', say: '"Legacy is converging into Zonar Ignition; qualify net-new onto Ignition."' },
   { area: 'Dates & roadmap', dont: 'Share any unvetted or forward date, or a 3-month roadmap commitment without a firm signed agreement.', say: '"Only PMM-aligned, product-signed-off timelines."' },
 ];
@@ -445,10 +517,9 @@ const ICP_VERTICALS = [
   { vertical: 'Pupil / student transportation', why: 'Ridership accountability, routing, parent/field-trip workflows, safety scrutiny.', anchors: 'Bus Suite (Pupil, ZPass), EVIR, Driver Performance, Ignition' },
   { vertical: 'Trucking & freight (VOC)', why: 'HOS/ELD compliance, heavy-duty ECU data, inspections, video safety.', anchors: 'ELD (ZLogs/Apollo), EVIR, V4 TCU, Driver Performance, Mobile App' },
   { vertical: 'Government / SLED', why: 'Compliance, auditability, provable delivery, mixed fleets.', anchors: 'Ignition, EVIR, ELD, asset tracking; compliance-sensitive messaging' },
-  { vertical: 'Vocational / mixed & off-road', why: 'Rugged hardware, equipment/asset tracking, diagnostics.', anchors: 'V4R, asset trackers, Ignition, ContiConnect TPMS' },
+  { vertical: 'Vocational / mixed & off-road', why: 'Rugged hardware, equipment/asset tracking, diagnostics.', anchors: 'V4R, asset trackers, Ignition, ContiConnect TPMS (pending confirmation)' },
   { vertical: 'Light-duty / service fleets', why: 'Plug-and-play install, cost-efficient tracking, coaching.', anchors: 'Zonar LD / Geo family, Ignition, Driver Performance' },
 ];
-
 
 const state = { mode: 'needs', query: '', activeFilter: 'all', selected: new Set(), selectedNeeds: new Set() };
 
