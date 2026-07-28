@@ -30,17 +30,14 @@
   }
 
   :root {
-    /* Primary UI colors (Zonar brand guide, p.13) */
     --bg: #FFFFFF;
     --interface-gray: #F4F4F4;
     --contrast-black: #212121;
     --action-blue: #0073E6;
 
-    /* Text and icon colors */
     --text-primary: #212121;
     --text-secondary: #666666;
 
-    /* Feedback colors — reserved for verdicts and status */
     --success-green: #2E7D32;
     --success-green-soft: #E8F3E9;
     --warning-yellow: #FFB300;
@@ -48,7 +45,6 @@
     --error-red: #D32F2F;
     --error-red-soft: #FBE9E8;
 
-    /* Core 6-color brand palette — platform badges and provenance tags */
     --true-blue: #00AEEF;
     --power-purple: #8400FF;
     --power-purple-soft: #F1E1FF;
@@ -70,122 +66,44 @@
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
   }
-  .wrap {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 40px 20px 100px;
-  }
-  header.page {
-    margin-bottom: 28px;
-  }
-  .eyebrow {
-    font-size: 14pt;
-    font-weight: 500;
-    color: var(--power-purple);
-    margin: 0 0 8px;
-  }
-  h1 {
-    font-size: 30pt;
-    font-weight: 700;
-    margin: 0 0 10px;
-    letter-spacing: -0.01em;
-    text-wrap: balance;
-    color: var(--text-primary);
-  }
-  .sub {
-    color: var(--text-primary);
-    font-size: 15pt;
-    font-weight: 400;
-    max-width: 68ch;
-    margin: 0;
-  }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 40px 20px 100px; }
+  header.page { margin-bottom: 28px; }
+  .eyebrow { font-size: 14pt; font-weight: 500; color: var(--power-purple); margin: 0 0 8px; }
+  h1 { font-size: 30pt; font-weight: 700; margin: 0 0 6px; letter-spacing: -0.01em; text-wrap: balance; color: var(--text-primary); }
+  .draft-flag { font-size: 14pt; font-weight: 500; color: var(--warning-yellow); background: var(--warning-yellow-soft); display: inline-block; padding: 3px 10px; border-radius: 5px; margin-bottom: 12px; }
+  .sub { color: var(--text-primary); font-size: 15pt; font-weight: 400; max-width: 68ch; margin: 0; }
 
-  .mode-tabs {
-    display: flex;
-    gap: 8px;
-    margin: 26px 0 22px;
-  }
-  .mode-tab {
-    font-family: inherit;
-    font-size: 14pt;
-    font-weight: 700;
-    padding: 10px 18px;
-    border-radius: 999px;
-    border: 1.5px solid var(--border);
-    background: var(--bg);
-    color: var(--text-primary);
-    cursor: pointer;
-  }
-  .mode-tab[aria-pressed="true"] {
-    background: var(--action-blue);
-    border-color: var(--action-blue);
-    color: #FFFFFF;
-  }
+  .mode-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 26px 0 22px; }
+  .mode-tab { font-family: inherit; font-size: 14pt; font-weight: 700; padding: 10px 18px; border-radius: 999px; border: 1.5px solid var(--border); background: var(--bg); color: var(--text-primary); cursor: pointer; }
+  .mode-tab[aria-pressed="true"] { background: var(--action-blue); border-color: var(--action-blue); color: #FFFFFF; }
 
-  .needs-intro {
-    font-size: 14pt;
-    font-weight: 400;
-    color: var(--text-secondary);
-    margin: 0 0 18px;
-    max-width: 68ch;
-  }
-  .needs-group-label {
-    font-size: 14pt;
-    font-weight: 700;
-    color: var(--text-secondary);
-    margin: 20px 0 4px;
-  }
+  .needs-intro { font-size: 14pt; font-weight: 400; color: var(--text-secondary); margin: 0 0 18px; max-width: 68ch; }
+  .needs-group-label { font-size: 14pt; font-weight: 700; color: var(--text-secondary); margin: 20px 0 4px; }
   .needs-group-label:first-child { margin-top: 0; }
-  .needs-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 22px;
-  }
+  .needs-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 22px; }
   .need-card {
-    all: unset;
-    box-sizing: border-box;
-    font-family: 'Roboto', Arial, sans-serif;
-    display: flex;
-    gap: 14px;
-    align-items: flex-start;
-    background: var(--bg);
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius);
-    padding: 16px 18px;
-    box-shadow: var(--shadow);
-    cursor: pointer;
-    width: 100%;
+    all: unset; box-sizing: border-box; font-family: 'Roboto', Arial, sans-serif;
+    display: flex; gap: 14px; align-items: flex-start;
+    background: var(--bg); border: 1.5px solid var(--border); border-radius: var(--radius);
+    padding: 16px 18px; box-shadow: var(--shadow); cursor: pointer; width: 100%;
   }
   .need-card[aria-pressed="true"] { border-color: var(--action-blue); }
-  .need-checkbox {
-    width: 22px;
-    height: 22px;
-    border-radius: 5px;
-    border: 2px solid var(--border);
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 2px;
-  }
+  .need-checkbox { width: 22px; height: 22px; border-radius: 5px; border: 2px solid var(--border); flex-shrink: 0; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
   .need-checkbox svg { width: 14px; height: 14px; stroke: #FFFFFF; display: none; }
   .need-card[aria-pressed="true"] .need-checkbox { background: var(--action-blue); border-color: var(--action-blue); }
   .need-card[aria-pressed="true"] .need-checkbox svg { display: block; }
   .need-content { flex: 1; min-width: 0; text-align: left; }
-  .need-label-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-bottom: 4px;
-  }
+  .need-label-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 4px; }
   .need-label { font-size: 16pt; font-weight: 500; color: var(--text-primary); }
   .need-description { font-size: 14pt; font-weight: 300; color: var(--text-secondary); display: block; }
 
-  .status-badge { font-size: 14pt; font-weight: 700; padding: 2px 9px; border-radius: 5px; }
+  .status-badge { font-size: 14pt; font-weight: 700; padding: 2px 9px; border-radius: 5px; white-space: nowrap; }
   .status-ga { background: var(--success-green-soft); color: var(--success-green); }
   .status-beta { background: var(--warning-yellow); color: var(--text-primary); }
+  .status-early { background: var(--warning-yellow); color: var(--text-primary); }
+  .status-eol { background: var(--error-red-soft); color: var(--error-red); }
+  .status-legacy { background: var(--interface-gray); color: var(--text-secondary); }
+  .confirm-badge { font-size: 14pt; font-weight: 500; padding: 2px 9px; border-radius: 5px; background: var(--power-purple-soft); color: var(--power-purple); white-space: nowrap; }
 
   .needs-recommendation { margin-bottom: 22px; }
   .needs-breakdown-list { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
@@ -196,277 +114,70 @@
   .need-breakdown-equipment { font-size: 14pt; font-weight: 400; color: var(--text-primary); }
   .need-breakdown-note { font-size: 14pt; font-weight: 300; color: var(--text-secondary); margin-top: 6px; }
 
-  .search-shell {
-    position: relative;
-    margin: 4px 0 14px;
-  }
-  .search-shell svg {
-    position: absolute;
-    left: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 18px;
-    height: 18px;
-    stroke: var(--text-secondary);
-    pointer-events: none;
-  }
-  #search {
-    width: 100%;
-    padding: 15px 16px 15px 46px;
-    font-size: 15pt;
-    font-weight: 400;
-    font-family: inherit;
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius);
-    background: var(--bg);
-    color: var(--text-primary);
-    box-shadow: var(--shadow);
-  }
-  #search:focus {
-    outline: 2px solid var(--action-blue);
-    outline-offset: 1px;
-    border-color: var(--action-blue);
-  }
+  .search-shell { position: relative; margin: 4px 0 14px; }
+  .search-shell svg { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; stroke: var(--text-secondary); pointer-events: none; }
+  #search { width: 100%; padding: 15px 16px 15px 46px; font-size: 15pt; font-weight: 400; font-family: inherit; border: 1.5px solid var(--border); border-radius: var(--radius); background: var(--bg); color: var(--text-primary); box-shadow: var(--shadow); }
+  #search:focus { outline: 2px solid var(--action-blue); outline-offset: 1px; border-color: var(--action-blue); }
   #search::placeholder { color: var(--text-secondary); }
 
-  .filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 22px;
-  }
-  .chip-filter {
-    font-family: inherit;
-    font-size: 14pt;
-    font-weight: 500;
-    padding: 7px 14px;
-    border-radius: 999px;
-    border: 1.5px solid var(--border);
-    background: var(--bg);
-    color: var(--text-primary);
-    cursor: pointer;
-  }
-  .chip-filter[aria-pressed="true"] {
-    background: var(--action-blue);
-    border-color: var(--action-blue);
-    color: #FFFFFF;
-  }
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+  .chip-filter { font-family: inherit; font-size: 14pt; font-weight: 500; padding: 7px 14px; border-radius: 999px; border: 1.5px solid var(--border); background: var(--bg); color: var(--text-primary); cursor: pointer; }
+  .chip-filter[aria-pressed="true"] { background: var(--action-blue); border-color: var(--action-blue); color: #FFFFFF; }
 
-  .count-line {
-    font-size: 14pt;
-    font-weight: 300;
-    color: var(--text-secondary);
-    margin: 0 0 14px;
-  }
+  .count-line { font-size: 14pt; font-weight: 300; color: var(--text-secondary); margin: 0 0 14px; }
 
-  .quick-compare {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  .quick-warning {
-    border-radius: 8px;
-    padding: 12px 16px;
-    font-size: 14pt;
-    font-weight: 400;
-    background: var(--interface-gray);
-    color: var(--text-primary);
-  }
+  .quick-compare { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+  .quick-warning { border-radius: 8px; padding: 12px 16px; font-size: 14pt; font-weight: 400; background: var(--interface-gray); color: var(--text-primary); }
   .quick-warning b { color: var(--text-primary); }
 
-  .results {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  .card {
-    background: var(--bg);
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius);
-    padding: 18px 18px 16px;
-    box-shadow: var(--shadow);
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 12px 18px;
-    align-items: start;
-  }
+  .results { display: flex; flex-direction: column; gap: 12px; }
+  .card { background: var(--bg); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 18px 18px 16px; box-shadow: var(--shadow); display: grid; grid-template-columns: 1fr auto; gap: 12px 18px; align-items: start; }
   .card-main { min-width: 0; }
-  .card-title-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-bottom: 6px;
-  }
-  .card-name {
-    font-family: 'Roboto', Arial, sans-serif;
-    font-size: 17pt;
-    font-weight: 500;
-    color: var(--text-primary);
-  }
-  .tag {
-    font-size: 14pt;
-    font-weight: 500;
-    padding: 3px 10px;
-    border-radius: 5px;
-    white-space: nowrap;
-  }
-  .tag-core { background: var(--power-purple-soft); color: var(--power-purple); }
-  .tag-related { background: var(--interface-gray); color: var(--text-secondary); }
-  .category {
-    font-size: 14pt;
-    font-weight: 300;
-    color: var(--text-secondary);
-    margin-bottom: 8px;
-  }
+  .card-title-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
+  .card-name { font-family: 'Roboto', Arial, sans-serif; font-size: 17pt; font-weight: 500; color: var(--text-primary); }
+  .tag { font-size: 14pt; font-weight: 500; padding: 3px 10px; border-radius: 5px; white-space: nowrap; }
+  .tag-hw { background: var(--precision-blue); color: #FFFFFF; }
+  .tag-sw { background: var(--power-purple-soft); color: var(--power-purple); }
+  .category { font-size: 14pt; font-weight: 300; color: var(--text-secondary); margin-bottom: 8px; }
   .platform-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
-  .badge {
-    font-size: 14pt;
-    font-weight: 700;
-    padding: 4px 11px;
-    border-radius: 6px;
-  }
+  .badge { font-size: 14pt; font-weight: 700; padding: 4px 11px; border-radius: 6px; }
   .badge-v1 { background: var(--precision-blue); color: #FFFFFF; }
   .badge-v2 { background: var(--true-blue); color: var(--text-primary); }
-  .notes {
-    font-size: 14pt;
-    font-weight: 400;
-    color: var(--text-primary);
-    max-width: 60ch;
-  }
-  .compare-btn {
-    font-family: inherit;
-    font-size: 14pt;
-    font-weight: 700;
-    padding: 8px 15px;
-    border-radius: 7px;
-    border: 1.5px solid var(--border);
-    background: var(--bg);
-    color: var(--text-primary);
-    cursor: pointer;
-    white-space: nowrap;
-  }
-  .compare-btn[aria-pressed="true"] {
-    background: var(--action-blue);
-    border-color: var(--action-blue);
-    color: #FFFFFF;
-  }
+  .badge-existing { background: var(--bg); color: var(--text-secondary); border: 1.5px solid var(--border); font-weight: 500; }
+  .notes { font-size: 14pt; font-weight: 400; color: var(--text-primary); max-width: 60ch; }
+  .compare-btn { font-family: inherit; font-size: 14pt; font-weight: 700; padding: 8px 15px; border-radius: 7px; border: 1.5px solid var(--border); background: var(--bg); color: var(--text-primary); cursor: pointer; white-space: nowrap; }
+  .compare-btn[aria-pressed="true"] { background: var(--action-blue); border-color: var(--action-blue); color: #FFFFFF; }
 
-  .empty-state {
-    text-align: center;
-    padding: 44px 20px;
-    color: var(--text-secondary);
-    font-size: 14pt;
-    font-weight: 300;
-  }
+  .empty-state { text-align: center; padding: 44px 20px; color: var(--text-secondary); font-size: 14pt; font-weight: 300; }
 
-  details.full-table {
-    margin-top: 32px;
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius);
-    background: var(--bg);
-    box-shadow: var(--shadow);
-  }
-  details.full-table summary {
-    cursor: pointer;
-    padding: 16px 18px;
-    font-weight: 700;
-    font-size: 14pt;
-    color: var(--text-primary);
-    list-style: none;
-  }
+  details.full-table { margin-top: 32px; border: 1.5px solid var(--border); border-radius: var(--radius); background: var(--bg); box-shadow: var(--shadow); }
+  details.full-table summary { cursor: pointer; padding: 16px 18px; font-weight: 700; font-size: 14pt; color: var(--text-primary); list-style: none; }
   details.full-table summary::-webkit-details-marker { display: none; }
-  details.full-table summary::before {
-    content: "▸ ";
-    color: var(--action-blue);
-  }
+  details.full-table summary::before { content: "▸ "; color: var(--action-blue); }
   details.full-table[open] summary::before { content: "▾ "; }
   .table-scroll { overflow-x: auto; padding: 0 18px 18px; }
   table { width: 100%; border-collapse: collapse; font-size: 14pt; }
-  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); white-space: nowrap; }
-  th:nth-child(4), td:nth-child(4) { white-space: normal; }
-  th { color: var(--text-secondary); font-weight: 500; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--text-secondary); font-weight: 500; white-space: nowrap; }
   td { font-weight: 400; color: var(--text-primary); }
-  td.name-cell { font-weight: 500; }
+  td.name-cell { font-weight: 500; white-space: nowrap; }
+  .ref-table td, .ref-table th { white-space: normal; }
 
-  footer.disclaimer {
-    margin-top: 34px;
-    font-size: 14pt;
-    font-weight: 300;
-    color: var(--text-primary);
-    border-top: 1.5px solid var(--border);
-    padding-top: 18px;
-  }
+  footer.disclaimer { margin-top: 34px; font-size: 14pt; font-weight: 300; color: var(--text-primary); border-top: 1.5px solid var(--border); padding-top: 18px; }
   footer.disclaimer p { margin: 0 0 8px; }
   footer.disclaimer strong { font-weight: 500; color: var(--text-primary); }
 
-  .tray {
-    position: fixed;
-    left: 0; right: 0; bottom: 0;
-    background: var(--bg);
-    border-top: 1.5px solid var(--border);
-    box-shadow: 0 -6px 24px rgba(33, 33, 33, 0.10);
-    padding: 16px 20px;
-    transform: translateY(100%);
-    transition: transform 0.22s ease;
-    z-index: 10;
-  }
+  .tray { position: fixed; left: 0; right: 0; bottom: 0; background: var(--bg); border-top: 1.5px solid var(--border); box-shadow: 0 -6px 24px rgba(33, 33, 33, 0.10); padding: 16px 20px; transform: translateY(100%); transition: transform 0.22s ease; z-index: 10; }
   @media (prefers-reduced-motion: reduce) { .tray { transition: none; } }
   .tray.visible { transform: translateY(0); }
   .tray-inner { max-width: 900px; margin: 0 auto; }
-  .tray-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 10px;
-  }
+  .tray-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
   .tray-title { font-size: 14pt; font-weight: 500; color: var(--text-primary); }
-  .clear-btn {
-    font-family: inherit;
-    font-size: 14pt;
-    font-weight: 500;
-    color: var(--text-secondary);
-    background: none;
-    border: none;
-    cursor: pointer;
-    text-decoration: underline;
-    padding: 0;
-  }
+  .clear-btn { font-family: inherit; font-size: 14pt; font-weight: 500; color: var(--text-secondary); background: none; border: none; cursor: pointer; text-decoration: underline; padding: 0; }
   .tray-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
-  .tray-chip {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    background: var(--interface-gray);
-    border-radius: 999px;
-    padding: 6px 8px 6px 14px;
-    font-size: 14pt;
-    font-weight: 400;
-  }
-  .tray-chip button {
-    border: none;
-    background: var(--text-secondary);
-    color: #FFFFFF;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    line-height: 20px;
-    text-align: center;
-    cursor: pointer;
-    font-size: 13pt;
-    padding: 0;
-  }
-  .verdict {
-    border-radius: 8px;
-    padding: 13px 16px;
-    font-size: 14pt;
-    font-weight: 400;
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-  }
+  .tray-chip { display: flex; align-items: center; gap: 7px; background: var(--interface-gray); border-radius: 999px; padding: 6px 8px 6px 14px; font-size: 14pt; font-weight: 400; }
+  .tray-chip button { border: none; background: var(--text-secondary); color: #FFFFFF; border-radius: 50%; width: 20px; height: 20px; line-height: 20px; text-align: center; cursor: pointer; font-size: 13pt; padding: 0; }
+  .verdict { border-radius: 8px; padding: 13px 16px; font-size: 14pt; font-weight: 400; display: flex; align-items: flex-start; gap: 10px; }
   .verdict-compatible { background: var(--success-green-soft); color: var(--text-primary); }
   .verdict-incompatible { background: var(--error-red-soft); color: var(--text-primary); }
   .verdict-compatible b { color: var(--success-green); }
@@ -481,6 +192,7 @@
   <header class="page">
     <p class="eyebrow">Sales &amp; support reference</p>
     <h1>Equipment ↔ platform lookup</h1>
+    <span class="draft-flag">Working draft — confirm ⚑ items before customer use</span>
     <p class="sub">Select what the customer needs to get a platform recommendation, or switch to equipment search if you already know the model name. Add more than one to check whether everything works together.</p>
   </header>
 
@@ -498,7 +210,7 @@
   <div id="equipmentPanel" style="display:none;">
     <div class="search-shell">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-      <input id="search" type="text" placeholder="Search “VidFleet”, or compare “VidFleet, Apollo”…" autocomplete="off">
+      <input id="search" type="text" placeholder="Search “V4”, or compare “VidFleet, Apollo”…" autocomplete="off">
     </div>
     <div class="quick-compare" id="quickCompare" style="display:none;"></div>
 
@@ -509,21 +221,41 @@
   </div>
 
   <details class="full-table">
-    <summary>View full hardware &amp; platform table (14 items)</summary>
+    <summary id="fullTableSummary">View full hardware &amp; platform table</summary>
     <div class="table-scroll">
       <table id="fullTable">
         <thead>
-          <tr><th>Item</th><th>Category</th><th>Platform</th><th>Notes</th></tr>
+          <tr><th>Item</th><th>Category</th><th>Platform</th><th>Status</th><th>Notes</th></tr>
         </thead>
         <tbody></tbody>
       </table>
     </div>
   </details>
 
+  <details class="full-table">
+    <summary>What NOT to say (guardrails)</summary>
+    <div class="table-scroll">
+      <table class="ref-table" id="guardrailsTable">
+        <thead><tr><th>Area</th><th>Don't</th><th>Say instead</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </details>
+
+  <details class="full-table">
+    <summary>Ideal customer by vertical</summary>
+    <div class="table-scroll">
+      <table class="ref-table" id="icpTable">
+        <thead><tr><th>Vertical</th><th>Why Zonar fits</th><th>Anchor solutions</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </details>
+
   <footer class="disclaimer">
-    <p><strong>Source:</strong> Product and Sales Sync, Jul 21 2026 — the “Supported Hardware” slide for equipment-name search, plus related product and roadmap context from the ELD, EVIR, Video, Mobile App, Neurion AI, and Integrations sections for the customer-need recommendations.</p>
-    <p>Ignition v2.0 and GTC/GTCx share the same backend, so they're treated as one platform here. Ignition v1.0 runs on a separate (PX) backend. This is a snapshot — the architecture decision due end of month may change qualification rules.</p>
-    <p>For anything not listed, or to confirm before a deal, check with the relevant PM: Bryant Maxey (ELD, EVIR, tablet and camera hardware), Devin Meadows (Ignition platform, video), Tatiana Badiceanu (AI products, CARB/emissions, integrations), or Terry Harleman (Zonar mobile app).</p>
+    <p><strong>Source:</strong> Zonar Product Strategy — Sales Enablement Field Guide (Product Management, working draft, July 2026), which consolidates the Hardware Compatibility Matrix, Feature Release Status, and What Not To Sell guardrails — plus the Jul 21 2026 Product and Sales Sync deck for context not yet folded into the field guide.</p>
+    <p>Ignition v2.0 and GTC/GTCx share the same backend, so they're treated as one platform here. Ignition v1.0 runs on a separate (PX) backend. Items marked ⚑ Needs confirmation are pending sign-off from the hardware owner or Product Marketing — confirm before using with a customer.</p>
+    <p>For anything not listed, check with the relevant PM: Bryant Maxey (ELD, EVIR, tablet and camera hardware), Devin Meadows (Ignition platform, video), Tatiana Badiceanu (AI products, CARB/emissions, integrations), or Terry Harleman (Zonar mobile app).</p>
   </footer>
 </div>
 
@@ -542,62 +274,172 @@
 const PLATFORM_LABEL = { v1: 'Ignition v1.0', v2: 'Ignition v2.0 / GTC' };
 
 const ITEMS = [
-  { id: 'v4tcu', name: 'V4 TCU', aliases: ['v4', 'telematics control unit', 'tcu'], category: 'TCU / telematics hardware', platforms: ['v2'], core: true,
-    notes: 'Primary v2.0 TCU · runs Zonar Logs ELD · supports camera-as-TCU.' },
-  { id: 'gtctcu', name: 'GTC / GTCx TCU', aliases: ['gtc', 'gtcx'], category: 'TCU / telematics hardware', platforms: ['v2'], core: true,
-    notes: 'GTC and Ignition v2.0 share the same backend — same platform, same qualification.' },
-  { id: 'zonarld', name: "Zonar LD (light-duty TCU)", aliases: ['zonar ld', 'ld tcu', 'light duty'], category: 'TCU / telematics hardware', platforms: ['v2'], core: true,
-    notes: 'A GTC product.' },
-  { id: 'geometris', name: "Geometris Plug'n'Play", aliases: ['geometris', "plug'n'play", 'plug and play', 'light-duty tcu'], category: 'TCU / telematics hardware', platforms: ['v1'], core: true,
-    notes: 'Light-duty TCU option — Ignition v1.0 only.' },
-  { id: 'coach', name: 'Coach cameras (MiTac + LightMetrics)', aliases: ['coach', 'mitac', 'lightmetrics', 'coach camera'], category: 'Camera', platforms: ['v2'], core: true,
-    notes: 'Single-pane-of-glass video is only available at v2.0. Coach is the current GTC(x) video product.' },
-  { id: 'vidfleet', name: 'VidFleet cameras (Waylens)', aliases: ['vidfleet', 'waylens'], category: 'Camera', platforms: ['v1'], core: true,
-    notes: 'Video for Ignition v1.0; incremental improvements planned. Camera-manufacturer direction is still under evaluation company-wide.' },
-  { id: 'apollo', name: 'Apollo ELD hardware (Geometris)', aliases: ['apollo', 'apollo eld', 'geo79'], category: 'ELD', platforms: ['v1'], core: true,
-    notes: 'Certified Apollo ELD fit, Geo79-certified in the US. Also approved in Canada.' },
-  { id: 'tablets', name: 'Managed tablets (Samsung TA5 / MiTac F840)', aliases: ['samsung ta5', 'mitac f840', 'managed tablet', 'tablet'], category: 'Tablet', platforms: ['v2'], core: true,
-    notes: 'Runs Zonar Logs ELD and EVIR on GTC / Ignition v2.0.' },
+  // --- TCU / telematics hardware ---
+  { id: 'v4tcu', name: 'V4 TCU (V4E-NBT)', aliases: ['v4', 'v4e-nbt', 'telematics control unit', 'tcu'], category: 'TCU / telematics hardware', sourceTag: 'hw',
+    platforms: ['v2'], existingOnly: ['v1'],
+    notes: 'Primary v2.0 TCU. Light + heavy duty; full ECU protocols (J1708/1587, J1979, J1939); runs ZLogs ELD; the direction for camera-as-TCU. Still supported (serviced) on Ignition v1.0, but not sold new there.' },
+  { id: 'v4r', name: 'V4R (rugged TCU)', aliases: ['v4r', 'rugged tcu'], category: 'TCU / telematics hardware', sourceTag: 'hw',
+    platforms: ['v2'], existingOnly: ['v1'],
+    notes: 'Rugged variant of the V4 — IP67/IP69K, extreme temperature, off-road duty. Same v1.0/v2.0 status as the standard V4.' },
+  { id: 'zonarld', name: "Zonar LD (light-duty TCU)", aliases: ['zonar ld', 'ld25', 'ld tcu', 'light duty'], category: 'TCU / telematics hardware', sourceTag: 'hw',
+    platforms: ['v2'], confirm: true,
+    notes: "Light-duty OBD-II plug-and-play; supports EV/hybrid. A GTC (v2.0) product — v1.0 status is still pending hardware-owner confirmation." },
+  { id: 'geometris', name: "Geometris Plug'n'Play", aliases: ['geometris', "plug'n'play", 'geo 87', 'geo 88', 'geo 68', 'geo 96', 'geo 87z', 'light-duty tcu'], category: 'TCU / telematics hardware', sourceTag: 'hw',
+    platforms: ['v1'],
+    notes: 'Geo family (87/88, 79, 68, 96, 87Z) — v1.0 light-duty OBD-II plug-and-play. Pairs with Apollo ELD; Geo 87Z is required for Canada ELD.' },
+  { id: 'calamp', name: 'CalAmp LMU / GV50', aliases: ['calamp', 'lmu', 'gv50', 'lmu 2630', 'lmu 3040'], category: 'TCU / telematics hardware', sourceTag: 'hw',
+    platforms: ['v1'],
+    notes: 'Legacy GPS Trackit wired TCU options. LMU 3040 is end-of-sale.' },
 
-  { id: 'zlogs', name: 'ZLogs (ELD software)', aliases: ['zlogs', 'zonar logs'], category: 'ELD software', platforms: ['v2'], core: false,
-    notes: "Runs on Ignition v2.0 and GTC/GTCx. Canada-approved on the Transport Canada registry as of 7/17 (ComDriver recertification)." },
-  { id: 'handhelds', name: '2010 handhelds', aliases: ['2010 handheld', 'handheld'], category: 'EVIR hardware', platforms: ['v2'], core: false,
-    notes: 'EVIR available now on GTC / Ignition v2.0.' },
-  { id: 'evirmobile', name: 'EVIR mobile', aliases: ['evir mobile', 'byod evir'], category: 'EVIR software', platforms: ['v2'], core: false,
-    notes: 'BYOD or managed tablets, on GTC / Ignition v2.0.' },
-  { id: 'mobileapp', name: 'Zonar mobile app', aliases: ['mobile app', 'driver app'], category: 'Software', platforms: ['v2'], core: false,
-    notes: 'Ships with the Ignition v2.0 launch; in beta now (MasTec anchor customer); not yet GA.' },
-  { id: 'neurion', name: 'Neurion Knowledge Base', aliases: ['neurion', 'knowledge base agent', 'ai assistant'], category: 'Software', platforms: ['v1'], core: false,
-    notes: 'AI assistant for product knowledge, in beta on Ignition v1.0 for selected users. v2.0 Knowledge Base, Fleet, and Insights agents are on the roadmap.' },
-  { id: 'deviceless', name: 'Deviceless Telematics (OEM aggregator)', aliases: ['deviceless telematics', 'cerebrumx', 'oem telematics'], category: 'Software', platforms: ['v1'], core: false,
-    notes: 'Live in Ignition Core (v1.0): real-time visibility, safety insights, diagnostics, EV reporting. Ignition v2.0 version is early-stage.' },
+  // --- Asset trackers ---
+  { id: 'ztrak', name: 'ZTrak AT22 (asset tracker)', aliases: ['ztrak', 'at22', 'asset tracker'], category: 'Asset tracker', sourceTag: 'hw',
+    platforms: ['v1', 'v2'],
+    notes: 'Up to 10-year field-replaceable battery; motion-based; IP67.' },
+  { id: 'solartrackers', name: 'TLP2 Solar / TTU / GL500MG / SmartOne', aliases: ['tlp2', 'solar tracker', 'smartone', 'gl500mg', 'ttu', 'satellite tracker'], category: 'Asset tracker', sourceTag: 'hw',
+    platforms: ['v1'], confirm: true,
+    notes: 'Solar, battery, and satellite (SmartOne, global coverage) options for trailers and equipment. Most are v1.0 / GPS Trackit SKUs; several v1.0/v2.0 mappings are still pending confirmation.' },
+
+  // --- Tablet ---
+  { id: 'tablets', name: 'Managed tablets (Samsung Tab Active5 / MioWORK F840)', aliases: ['tab active5', 'miowork f840', 'managed tablet', 'tablet'], category: 'Tablet', sourceTag: 'hw',
+    platforms: ['v2'],
+    notes: 'Samsung Tab Active5 (Android 14) or MioWORK F840 (Android 13); runs the Zonar Mobile App + EVIR. v2.0 preferred, though the app experience on it is still not GA. The V4 is not suitable for managed tablets — never position it that way.' },
+
+  // --- EVIR ---
+  { id: 'handhelds', name: '2010 handhelds', aliases: ['2010 handheld', 'handheld', 'zonar 2010'], category: 'EVIR hardware', sourceTag: 'hw',
+    platforms: ['v2'], existingOnly: ['v1'],
+    notes: 'EVIR inspection handheld + reader station.' },
+  { id: 'evirmobile', name: 'EVIR mobile', aliases: ['evir mobile', 'byod evir'], category: 'EVIR software', sourceTag: 'hw',
+    platforms: ['v2'],
+    notes: 'BYOD or managed tablets, on GTC / Ignition v2.0. Electronic inspection with full parity delivered inside Ignition.' },
+
+  // --- Student transportation ---
+  { id: 'zpass', name: 'ZPass / ZPass SRT', aliases: ['zpass', 'z pass', 'student rfid'], category: 'Student transportation', sourceTag: 'hw',
+    platforms: ['v2'],
+    notes: 'Student RFID ridership tracking for Pupil / Bus Suite.' },
+
+  // --- TPMS ---
+  { id: 'conticonnect', name: 'ContiConnect TPMS', aliases: ['conticonnect', 'tpms', 'tire pressure'], category: 'TPMS', sourceTag: 'hw',
+    platforms: ['v2'],
+    notes: 'Tire-pressure monitoring system — a net-new category for Zonar.' },
+
+  // --- ELD ---
+  { id: 'apollo', name: 'Apollo ELD hardware (Geometris)', aliases: ['apollo', 'apollo eld', 'geo79'], category: 'ELD', sourceTag: 'hw',
+    platforms: ['v1'],
+    notes: 'Certified Apollo ELD fit, Geo79-certified in the US. Also approved in Canada (requires Geo 87Z).' },
+  { id: 'zlogs', name: 'ZLogs (ELD software)', aliases: ['zlogs', 'zonar logs'], category: 'ELD software', sourceTag: 'hw',
+    platforms: ['v2'],
+    notes: 'Runs on Ignition v2.0 and GTC/GTCx. Canada-approved on the Transport Canada registry as of 7/17 — qualified/RFP conversations only until Marketing signs off on a broad announcement.' },
+
+  // --- Cameras ---
+  { id: 'coach', name: 'Zonar DashCam / Coach (MiTac + LightMetrics)', aliases: ['coach', 'dashcam', 'mitac', 'lightmetrics', 'ff22', 'df22', 'df12'], category: 'Camera', sourceTag: 'hw',
+    platforms: ['v2'],
+    notes: 'Models range from entry (DF12) to enterprise (FF22/DF22), plus DF24/FF25/DF32 and dual-facing configs. Feeds Driver Performance; single-pane-of-glass at v2.0 is early adoption.' },
+  { id: 'dashcamaux', name: 'Zonar DashCam aux camera', aliases: ['aux camera', 'tvi sc25', 'rc25', 'ec24'], category: 'Camera', sourceTag: 'hw',
+    platforms: ['v2'],
+    notes: 'Side/rear accessory (TVI SC25/RC25, USB EC24); 120° FOV; IP69K; connects via USB.' },
+  { id: 'vidfleet', name: 'VidFleet Air I / II', aliases: ['vidfleet', 'waylens', 'air 1', 'air 2'], category: 'Camera', sourceTag: 'hw',
+    platforms: ['v1'],
+    notes: 'Waylens 360° coverage (forward, driver, sides). Expansion offerings under evaluation.' },
+  { id: 'vidfleetaux', name: 'VidFleet external / aux camera', aliases: ['vidfleet aux', 'external camera'], category: 'Camera', sourceTag: 'hw',
+    platforms: ['v1'],
+    notes: 'Up to 2 external cameras (rear/side/compartment); up to 45 ft extension.' },
+  { id: 'vidfleetone', name: 'VidFleet One', aliases: ['vidfleet one'], category: 'Camera', sourceTag: 'hw',
+    platforms: ['v1'],
+    notes: 'Road + driver, 1 channel, no AI; simplified camera-as-GPS install (no separate telematics device required).' },
+  { id: 'vidfleetaiplus', name: 'VidFleet AI+', aliases: ['vidfleet ai+', 'ai plus'], category: 'Camera', sourceTag: 'hw',
+    platforms: [], existingOnly: ['v1'], saleStatus: 'eol',
+    notes: 'End of Sale (Q1 2025); EOL announced 1/6/2025. Do not sell — still serviced for existing customers.' },
+  { id: 'sensata', name: 'Sensata KP2 / CP4 / CP2', aliases: ['sensata', 'kp2', 'cp4', 'cp2'], category: 'Camera', sourceTag: 'hw',
+    platforms: [], saleStatus: 'legacy',
+    notes: 'Serviceable DVR option on the legacy P4 platform only — no AI, no live stream. Not on Ignition (pre-Ignition, not strategic); CP2 is superseded by KP2.' },
+
+  // --- Software solutions ---
+  { id: 'ignitionplatform', name: 'Zonar Ignition (platform)', aliases: ['ignition', 'zonar-one', 'zonar one'], category: 'Software', sourceTag: 'sw',
+    platforms: ['v1'],
+    notes: 'The fleet-management platform: GPS tracking, maps/live view, reporting, admin, driver & asset management. Ignition v1.0 (PX) is live and what we stand behind today. Ignition v2.0 (GTC) is in hardening — do not position as GA yet.' },
+  { id: 'mobileapp', name: 'Zonar mobile app', aliases: ['mobile app', 'driver app'], category: 'Software', sourceTag: 'sw',
+    platforms: ['v2'], saleStatus: 'beta',
+    notes: 'In beta now (MasTec anchor customer). Ships with the Ignition v2.0 launch; app GA follows separately — do not sell as GA.' },
+  { id: 'driverperformance', name: 'Driver Performance & Coaching', aliases: ['driver performance', 'coaching', 'ai insights'], category: 'Software', sourceTag: 'sw',
+    platforms: ['v2'],
+    notes: 'GA on GTC: normalized safety events (LightMetrics), severity scoring, per-driver risk score, coaching cases (Intervention / guided & self-guided Education), and AI Insights. Not GA on v1.0 — do not imply otherwise.' },
+  { id: 'neurion', name: 'Neurion Knowledge Base', aliases: ['neurion', 'knowledge base agent', 'ai assistant'], category: 'Software', sourceTag: 'sw',
+    platforms: ['v1'],
+    notes: 'Live: AI chat that routes to domain agents and answers platform how-to questions, grounded in Zonar knowledge. The v2.0 Knowledge Base agent is targeted for August (Pending PMM); Fleet and Insights agents remain roadmap.' },
+  { id: 'bussuite', name: 'Bus Suite', aliases: ['bus suite', 'pupil', 'student transportation'], category: 'Software', sourceTag: 'sw',
+    platforms: ['v1', 'v2'],
+    notes: "GA: routing, run list/merge, custom road network, field-trip request workflow, PowerSchool integration (early accounts). Its own portal, accessible from both Ignition versions. Deeper Ignition SSO / Time & Attendance integration is roadmap." },
+  { id: 'deviceless', name: 'Deviceless Telematics (OEM aggregator)', aliases: ['deviceless telematics', 'cerebrumx', 'oem telematics'], category: 'Software', sourceTag: 'sw',
+    platforms: ['v1'],
+    notes: 'Live in Ignition Core (v1.0): real-time visibility, safety insights, diagnostics, EV reporting. This is an internal capability description, not a customer-facing product name — avoid "CerebrumX." Ignition v2.0 version is early-stage.' },
+  { id: 'integrations', name: 'Integrations (Trucker Cloud, Fleetio, integration platform)', aliases: ['integrations', 'trucker cloud', 'fleetio', 'integration platform'], category: 'Software', sourceTag: 'sw',
+    platforms: [], saleStatus: 'early', confirm: true,
+    notes: 'Early / phased. Trucker Cloud: GPS/telematics first, video & safety events later. Fleetio delayed. Core integration platform MVP in discovery.' },
+  { id: 'messagingforms', name: 'Messaging / Forms', aliases: ['messaging', 'forms', 'chat'], category: 'Software', sourceTag: 'sw',
+    platforms: [], saleStatus: 'early',
+    notes: 'Legacy messaging is sunsetting; being rebuilt as a native Ignition v2.0 Chat & Forms module. No firm timeline yet.' },
+  { id: 'faultiq', name: 'Zonar FaultIQ (predictive maintenance)', aliases: ['faultiq', 'predictive maintenance'], category: 'Software', sourceTag: 'sw',
+    platforms: [], saleStatus: 'early', confirm: true,
+    notes: 'Predictive maintenance capability referenced in Student Transportation and Energy & Utility solution suites. Platform mapping and GA status are not yet in the source-of-truth pages — confirm with Product before positioning.' },
+  { id: 'fieldsync', name: 'Zonar FieldSync (field service management)', aliases: ['fieldsync', 'field service management', 'fsm'], category: 'Software', sourceTag: 'sw',
+    platforms: [], saleStatus: 'early', confirm: true,
+    notes: 'Field service management — technician scheduling, dispatch, job optimization. Sold per-technician, stand-alone or with a tracking/video subscription. Ignition v1.0/v2.0 mapping not yet confirmed.' },
 ];
 
 const NEEDS = [
   { id: 'carb', group: 'Compliance and inspections', label: 'CARB / emissions compliance', description: 'State and federal emissions reporting requirements.', platforms: ['v2'], status: 'ga',
     equipment: { v2: ['v4tcu'] }, note: 'V4 is the only hardware that qualifies today. PX (Ignition v1.0) is being phased out for CARB — GTCx and Ignition v2.0 are the preferred platforms.' },
+  { id: 'heavy-duty-ecu', group: 'Compliance and inspections', label: 'Heavy-duty fleet needing full ECU + ELD data', description: 'Mixed or heavy-duty fleets that need complete engine/ECU data alongside compliance logging.', platforms: ['v2'], status: 'ga',
+    equipment: { v2: ['v4tcu'] }, note: 'Land on Ignition v2.0 (GTC) with the V4 TCU (V4R if rugged/off-road); ZLogs for ELD.' },
   { id: 'eld-us', group: 'Compliance and inspections', label: 'ELD compliance — US', description: 'Electronic logging device requirements for US fleets.', platforms: ['v1', 'v2'], status: 'ga',
     equipment: { v1: ['apollo'], v2: ['zlogs'] }, note: 'Apollo ELD hardware on Ignition v1.0 (Geo79-certified), or ZLogs on Ignition v2.0/GTC — both live today, no forced hardware swap at upgrade.' },
   { id: 'eld-canada', group: 'Compliance and inspections', label: 'ELD compliance — Canada', description: 'Electronic logging device requirements for Canadian fleets.', platforms: ['v1', 'v2'], status: 'ga',
-    equipment: { v1: ['apollo'], v2: ['zlogs'] }, note: 'Apollo (v1.0) available now; ZLogs (v2.0/GTC) approved on the Transport Canada registry as of 7/17 (ComDriver recertification).' },
+    equipment: { v1: ['apollo'], v2: ['zlogs'] }, note: 'Apollo (v1.0, requires Geo 87Z) available now; ZLogs (v2.0/GTC) approved on the Transport Canada registry as of 7/17 — qualified/RFP conversations only until Marketing signs off.' },
   { id: 'evir', group: 'Compliance and inspections', label: 'Vehicle inspection reporting (EVIR)', description: 'Driver vehicle inspection reports, handhelds, or EVIR Mobile.', platforms: ['v2'], status: 'ga',
-    equipment: { v2: ['handhelds', 'tablets', 'evirmobile'] }, note: 'Live on GTC / Ignition v2.0 today. No net-new support on Ignition v1.0.' },
+    equipment: { v2: ['handhelds', 'tablets', 'evirmobile'] }, note: 'Live on GTC / Ignition v2.0 today (2010 handhelds, managed tablets, EVIR Mobile). No net-new support on Ignition v1.0.' },
 
   { id: 'video-standard', group: 'Video', label: 'Standard fleet video (available today)', description: 'Camera footage and event review on a proven, live product.', platforms: ['v1', 'v2'], status: 'ga',
-    equipment: { v1: ['vidfleet'], v2: ['coach'] }, note: 'VidFleet (Waylens) on Ignition v1.0, or Coach (MiTac + LightMetrics) on GTC(x) — pick based on which platform the customer is already on.' },
+    equipment: { v1: ['vidfleet'], v2: ['coach'] }, note: 'VidFleet (Waylens) on Ignition v1.0, or Coach (MiTac + LightMetrics) on GTC(x) — pick based on which platform the customer is already on. Not VidFleet AI+ (end of sale).' },
   { id: 'video-unified', group: 'Video', label: 'Unified video + Driver Performance', description: 'One screen for video and driver scoring, not two separate products.', platforms: ['v2'], status: 'beta',
-    equipment: { v2: ['coach'] }, note: 'Only available at Ignition v2.0, and only in early adoption with MasTec — not GA yet. Driver Performance is not GA on v1.0.' },
+    equipment: { v2: ['coach', 'driverperformance'] }, note: 'Only available at Ignition v2.0, and only in early adoption — not GA yet. Driver Performance itself is GA on GTC, but the single-pane-of-glass experience is early adoption.' },
 
+  { id: 'managed-tablet-workflow', group: 'Mobile and AI', label: 'Managed-tablet in-cab workflow', description: 'EVIR, messaging, and ELD all running through a driver-facing tablet.', platforms: ['v2'], status: 'beta',
+    equipment: { v2: ['tablets', 'mobileapp'] }, note: 'v2.0 with a managed tablet (Tab Active5 or MioWORK F840) plus the Zonar Mobile App. The app is beta and ships with the 2.0 launch — do not sell as GA. Never position the V4 for tablets.' },
   { id: 'mobile-app', group: 'Mobile and AI', label: 'Driver mobile app', description: 'Login, asset association, and the Driver Performance widget on a phone.', platforms: ['v2'], status: 'beta',
     equipment: { v2: ['mobileapp'] }, note: 'In beta now (MasTec anchor customer). Ships with the Ignition v2.0 launch; app GA follows separately.' },
-  { id: 'neurion', group: 'Mobile and AI', label: 'AI assistant for product knowledge', description: 'Ask questions in plain language and get routed to the right answer.', platforms: ['v1'], status: 'beta',
-    equipment: { v1: ['neurion'] }, note: 'Neurion Knowledge Base agent is in beta on Ignition v1.0 today, for selected users. Ignition v2.0 Knowledge Base, Fleet, and Insights agents are on the roadmap.' },
+  { id: 'neurion', group: 'Mobile and AI', label: 'AI assistant for product knowledge', description: 'Ask questions in plain language and get routed to the right answer.', platforms: ['v1'], status: 'ga',
+    equipment: { v1: ['neurion'] }, note: "Neurion Knowledge Base agent is live on Ignition v1.0 today, routing questions to Zonar's own knowledge. The v2.0 Knowledge Base agent is targeted for August; Fleet and Insights agents remain roadmap." },
   { id: 'deviceless', group: 'Mobile and AI', label: 'OEM / deviceless telematics', description: 'Connected-vehicle data straight from the OEM — no aftermarket TCU install.', platforms: ['v1'], status: 'ga',
-    equipment: { v1: ['deviceless'] }, note: 'Deviceless Telematics (formerly CerebrumX) is live in Ignition Core (v1.0) today. The Ignition v2.0 version is early-stage, sequencing pending the architecture decision.' },
+    equipment: { v1: ['deviceless'] }, note: 'Live in Ignition Core (v1.0) today — real-time visibility, safety insights, diagnostics, EV reporting. The Ignition v2.0 version is early-stage, sequencing pending the architecture decision.' },
 
-  { id: 'light-duty', group: 'Hardware', label: 'Light-duty vehicle telematics', description: 'Tracking for light-duty vehicles rather than a full TCU install.', platforms: ['v1', 'v2'], status: 'ga',
+  { id: 'student-transportation', group: 'Student transportation', label: 'Student transportation (Bus Suite)', description: 'Routing, ridership, and field trips for pupil transportation fleets.', platforms: ['v1', 'v2'], status: 'ga',
+    equipment: { v1: ['bussuite'], v2: ['bussuite', 'zpass', 'evirmobile'] }, note: 'Bus Suite (Pupil / ZPass) runs on either platform; add EVIR and Driver Performance for a full compliance and safety story.' },
+
+  { id: 'light-duty', group: 'Hardware and assets', label: 'Light-duty vehicle telematics', description: 'Tracking for light-duty vehicles rather than a full TCU install.', platforms: ['v1', 'v2'], status: 'ga',
     equipment: { v1: ['geometris'], v2: ['zonarld'] }, note: "Geometris Plug'n'Play on Ignition v1.0, or Zonar LD (a GTC product) on GTC / Ignition v2.0." },
+  { id: 'asset-tracking', group: 'Hardware and assets', label: 'Asset, trailer, and equipment tracking', description: 'Tracking non-powered assets, trailers, or equipment rather than vehicles.', platforms: ['v1', 'v2'], status: 'ga',
+    equipment: { v1: ['solartrackers', 'ztrak'], v2: ['ztrak'] }, note: 'Choose a powered vs. battery/solar tracker by power availability and ping needs; SmartOne for global/satellite coverage. Some v1.0/v2.0 mappings are still pending confirmation.' },
 ];
+
+const GUARDRAILS = [
+  { area: 'Platform', dont: 'Position Ignition v2.0 as GA, or quote multi-account / v1.0→v2.0 upgrade dates.', say: '"GTC and Ignition v1.0 are what we stand behind today; v2.0 is in hardening."' },
+  { area: 'Mobile', dont: "Sell the Zonar Mobile App as GA — it's beta. Don't quote module names or dates, or a BYOD ELD timeline.", say: '"In beta with MasTec; ships with the Ignition 2.0 launch."' },
+  { area: 'ELD', dont: 'Quote a Canadian ZLogs go-live date, make a broad Canada re-announcement, or sell new ELD on Ignition Core / PX.', say: '"US: ZLogs (v2.0/GTC) and Apollo (v1.0) live. Canada: approved 7/17; qualified/RFP conversations only until Marketing signs off."' },
+  { area: 'Video', dont: 'Commit to a single camera manufacturer or a Zonar-firmware GA date; quote video package tiers; go deep on SmartLink / camera-as-TCU.', say: '"VidFleet on v1.0, Coach on GTC; the camera path forward is under evaluation."' },
+  { area: 'Naming', dont: 'Say "IgnitionX," "Driver App," "CerebrumX / Cerebral Max," or "GPS Trackit."', say: '"Zonar Ignition (v1.0 / v2.0); Zonar Mobile App." Deviceless telematics is an internal capability, not a customer-facing product name.' },
+  { area: 'Hardware', dont: 'Position the V4 for managed tablets, or promise rugged / next-gen hardware (V4 Base 2, V4R-D) as available.', say: '"Managed tablets run on v2.0; next-gen hardware is future/roadmap."' },
+  { area: 'Legacy', dont: 'Position P4 / TSO Mobile as strategic, or write net-new business on legacy platforms.', say: '"Legacy is converging into Zonar Ignition; qualify net-new onto Ignition."' },
+  { area: 'Dates & roadmap', dont: 'Share any unvetted or forward date, or a 3-month roadmap commitment without a firm signed agreement.', say: '"Only PMM-aligned, product-signed-off timelines."' },
+];
+
+const ICP_VERTICALS = [
+  { vertical: 'Pupil / student transportation', why: 'Ridership accountability, routing, parent/field-trip workflows, safety scrutiny.', anchors: 'Bus Suite (Pupil, ZPass), EVIR, Driver Performance, Ignition' },
+  { vertical: 'Trucking & freight (VOC)', why: 'HOS/ELD compliance, heavy-duty ECU data, inspections, video safety.', anchors: 'ELD (ZLogs/Apollo), EVIR, V4 TCU, Driver Performance, Mobile App' },
+  { vertical: 'Government / SLED', why: 'Compliance, auditability, provable delivery, mixed fleets.', anchors: 'Ignition, EVIR, ELD, asset tracking; compliance-sensitive messaging' },
+  { vertical: 'Vocational / mixed & off-road', why: 'Rugged hardware, equipment/asset tracking, diagnostics.', anchors: 'V4R, asset trackers, Ignition, ContiConnect TPMS' },
+  { vertical: 'Light-duty / service fleets', why: 'Plug-and-play install, cost-efficient tracking, coaching.', anchors: 'Zonar LD / Geo family, Ignition, Driver Performance' },
+];
+
 
 const state = { mode: 'needs', query: '', activeFilter: 'all', selected: new Set(), selectedNeeds: new Set() };
 
@@ -605,9 +447,15 @@ const CATEGORIES = ['all', ...Array.from(new Set(ITEMS.map(i => i.category)))];
 
 function norm(s) { return s.toLowerCase().trim(); }
 function itemName(id) { const item = ITEMS.find(i => i.id === id); return item ? item.name : id; }
-function statusLabel(status) { return status === 'ga' ? 'Live now' : 'Beta — not GA'; }
+function needStatusLabel(status) { return status === 'ga' ? 'Live now' : 'Beta — not GA'; }
+function itemStatusLabel(status) {
+  if (status === 'beta') return 'Beta — not GA';
+  if (status === 'early') return 'Early / roadmap';
+  if (status === 'eol') return 'EOL — do not sell';
+  if (status === 'legacy') return 'Legacy (pre-Ignition)';
+  return 'Live now';
+}
 
-// Splits "VidFleet, Apollo" / "VidFleet and Apollo" / "VidFleet + Apollo" into separate search terms.
 function splitTerms(query) {
   return query.split(/,|;|\band\b|\+/i).map(norm).filter(Boolean);
 }
@@ -645,8 +493,21 @@ function renderFilters() {
   });
 }
 
-function platformBadges(platforms) {
-  return platforms.map(p => `<span class="badge badge-${p}">${PLATFORM_LABEL[p]}</span>`).join('');
+function platformBadges(item) {
+  const offered = (item.platforms || []).map(p => `<span class="badge badge-${p}">${PLATFORM_LABEL[p]}</span>`);
+  const existing = (item.existingOnly || []).map(p => `<span class="badge badge-existing">${PLATFORM_LABEL[p]} · existing only</span>`);
+  return offered.concat(existing).join('');
+}
+
+function extraTags(item) {
+  let html = '';
+  if (item.saleStatus && item.saleStatus !== 'ga') {
+    html += `<span class="status-badge status-${item.saleStatus}">${itemStatusLabel(item.saleStatus)}</span>`;
+  }
+  if (item.confirm) {
+    html += `<span class="confirm-badge">⚑ Needs confirmation</span>`;
+  }
+  return html;
 }
 
 function renderResults() {
@@ -671,10 +532,11 @@ function renderResults() {
       <div class="card-main">
         <div class="card-title-row">
           <span class="card-name">${item.name}</span>
-          <span class="tag ${item.core ? 'tag-core' : 'tag-related'}">${item.core ? 'Hardware table' : 'Related product'}</span>
+          <span class="tag ${item.sourceTag === 'sw' ? 'tag-sw' : 'tag-hw'}">${item.sourceTag === 'sw' ? 'Software solution' : 'Hardware matrix'}</span>
+          ${extraTags(item)}
         </div>
         <div class="category">${item.category}</div>
-        <div class="platform-badges">${platformBadges(item.platforms)}</div>
+        <div class="platform-badges">${platformBadges(item)}</div>
         <div class="notes">${item.notes}</div>
       </div>
       <button class="compare-btn" type="button" aria-pressed="${selected}">${selected ? '✓ Added' : '+ Compare'}</button>
@@ -689,16 +551,38 @@ function renderResults() {
 }
 
 function renderFullTable() {
+  document.getElementById('fullTableSummary').textContent = `View full hardware & platform table (${ITEMS.length} items)`;
   const tbody = document.querySelector('#fullTable tbody');
   tbody.innerHTML = '';
   ITEMS.forEach(item => {
     const tr = document.createElement('tr');
     tr.innerHTML = `
-      <td class="name-cell">${item.name}</td>
+      <td class="name-cell">${item.name}${item.confirm ? ' ⚑' : ''}</td>
       <td>${item.category}</td>
-      <td>${platformBadges(item.platforms)}</td>
+      <td>${platformBadges(item) || '<span class="badge badge-existing">—</span>'}</td>
+      <td>${item.saleStatus && item.saleStatus !== 'ga' ? `<span class="status-badge status-${item.saleStatus}">${itemStatusLabel(item.saleStatus)}</span>` : `<span class="status-badge status-ga">${itemStatusLabel('ga')}</span>`}</td>
       <td>${item.notes}</td>
     `;
+    tbody.appendChild(tr);
+  });
+}
+
+function renderGuardrails() {
+  const tbody = document.querySelector('#guardrailsTable tbody');
+  tbody.innerHTML = '';
+  GUARDRAILS.forEach(g => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td class="name-cell">${g.area}</td><td>${g.dont}</td><td>${g.say}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+function renderICP() {
+  const tbody = document.querySelector('#icpTable tbody');
+  tbody.innerHTML = '';
+  ICP_VERTICALS.forEach(v => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td class="name-cell">${v.vertical}</td><td>${v.why}</td><td>${v.anchors}</td>`;
     tbody.appendChild(tr);
   });
 }
@@ -736,18 +620,20 @@ function renderTray() {
     return;
   }
 
-  const commonPlatforms = ['v1', 'v2'].filter(p => selectedItems.every(i => i.platforms.includes(p)));
+  const commonPlatforms = ['v1', 'v2'].filter(p => selectedItems.every(i => (i.platforms || []).includes(p)));
 
   if (commonPlatforms.length > 0) {
     verdictEl.classList.add('verdict-compatible');
-    verdictEl.innerHTML = `<span class="verdict-icon">✅</span><span class="verdict-text"><b>Compatible</b> — all selected items run on ${commonPlatforms.map(p => PLATFORM_LABEL[p]).join(' and ')}.</span>`;
+    verdictEl.innerHTML = `<span class="verdict-icon">✅</span><span class="verdict-text"><b>Compatible</b> — all selected items are sellable on ${commonPlatforms.map(p => PLATFORM_LABEL[p]).join(' and ')}.</span>`;
   } else {
-    const v1Items = selectedItems.filter(i => i.platforms.includes('v1')).map(i => i.name);
-    const v2Items = selectedItems.filter(i => i.platforms.includes('v2')).map(i => i.name);
+    const v1Items = selectedItems.filter(i => (i.platforms || []).includes('v1')).map(i => i.name);
+    const v2Items = selectedItems.filter(i => (i.platforms || []).includes('v2')).map(i => i.name);
+    const neitherItems = selectedItems.filter(i => (i.platforms || []).length === 0).map(i => i.name);
     verdictEl.classList.add('verdict-incompatible');
-    verdictEl.innerHTML = `<span class="verdict-icon">⚠️</span><span class="verdict-text"><b>Incompatible</b> — no single platform supports all of these.
+    verdictEl.innerHTML = `<span class="verdict-icon">⚠️</span><span class="verdict-text"><b>Incompatible</b> — no single platform covers all of these as a current sale.
       <span class="verdict-detail">${PLATFORM_LABEL.v1} only: ${v1Items.join(', ') || '—'}</span>
-      <span class="verdict-detail">${PLATFORM_LABEL.v2} only: ${v2Items.join(', ') || '—'}</span></span>`;
+      <span class="verdict-detail">${PLATFORM_LABEL.v2} only: ${v2Items.join(', ') || '—'}</span>
+      ${neitherItems.length ? `<span class="verdict-detail">Not currently sellable on either — see its status: ${neitherItems.join(', ')}</span>` : ''}</span>`;
   }
 }
 
@@ -776,14 +662,14 @@ function renderQuickCompare() {
   }
 
   if (resolved.length >= 2) {
-    const commonPlatforms = ['v1', 'v2'].filter(p => resolved.every(i => i.platforms.includes(p)));
+    const commonPlatforms = ['v1', 'v2'].filter(p => resolved.every(i => (i.platforms || []).includes(p)));
     const verdictClass = commonPlatforms.length ? 'verdict-compatible' : 'verdict-incompatible';
     if (commonPlatforms.length > 0) {
-      html += `<div class="verdict ${verdictClass}"><span class="verdict-icon">✅</span><span class="verdict-text"><b>Compatible</b> — ${resolved.map(i => i.name).join(', ')} all run on ${commonPlatforms.map(p => PLATFORM_LABEL[p]).join(' and ')}.</span></div>`;
+      html += `<div class="verdict ${verdictClass}"><span class="verdict-icon">✅</span><span class="verdict-text"><b>Compatible</b> — ${resolved.map(i => i.name).join(', ')} all sellable on ${commonPlatforms.map(p => PLATFORM_LABEL[p]).join(' and ')}.</span></div>`;
     } else {
-      const v1Items = resolved.filter(i => i.platforms.includes('v1')).map(i => i.name);
-      const v2Items = resolved.filter(i => i.platforms.includes('v2')).map(i => i.name);
-      html += `<div class="verdict ${verdictClass}"><span class="verdict-icon">⚠️</span><span class="verdict-text"><b>Incompatible</b> — no single platform supports all of these.
+      const v1Items = resolved.filter(i => (i.platforms || []).includes('v1')).map(i => i.name);
+      const v2Items = resolved.filter(i => (i.platforms || []).includes('v2')).map(i => i.name);
+      html += `<div class="verdict ${verdictClass}"><span class="verdict-icon">⚠️</span><span class="verdict-text"><b>Incompatible</b> — no single platform covers all of these.
         <span class="verdict-detail">${PLATFORM_LABEL.v1} only: ${v1Items.join(', ') || '—'}</span>
         <span class="verdict-detail">${PLATFORM_LABEL.v2} only: ${v2Items.join(', ') || '—'}</span></span></div>`;
     }
@@ -815,7 +701,7 @@ function renderNeeds() {
       <span class="need-content">
         <span class="need-label-row">
           <span class="need-label">${need.label}</span>
-          <span class="status-badge status-${need.status}">${statusLabel(need.status)}</span>
+          <span class="status-badge status-${need.status}">${needStatusLabel(need.status)}</span>
           ${need.platforms.map(p => `<span class="badge badge-${p}">${PLATFORM_LABEL[p]}</span>`).join('')}
         </span>
         <span class="need-description">${need.description}</span>
@@ -862,7 +748,7 @@ function renderNeedsRecommendation() {
       <div class="need-breakdown">
         <div class="need-breakdown-head">
           <span class="need-breakdown-label">${need.label}</span>
-          <span class="status-badge status-${need.status}">${statusLabel(need.status)}</span>
+          <span class="status-badge status-${need.status}">${needStatusLabel(need.status)}</span>
         </div>
         ${platformLines}
         <div class="need-breakdown-note">${need.note}</div>
@@ -891,5 +777,7 @@ document.getElementById('search').addEventListener('input', (e) => { state.query
 document.getElementById('clearAll').addEventListener('click', () => { state.selected.clear(); render(); });
 
 renderFullTable();
+renderGuardrails();
+renderICP();
 render();
 </script>
