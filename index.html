@@ -156,14 +156,18 @@
   details.full-table summary::before { content: "▸ "; color: var(--action-blue); }
   details.full-table[open] summary::before { content: "▾ "; }
   .table-scroll { overflow-x: auto; padding: 0 18px 18px; }
-  table { width: max-content; min-width: 100%; border-collapse: collapse; font-size: 14pt; }
-  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; white-space: nowrap; }
+  table { width: 100%; table-layout: fixed; border-collapse: collapse; font-size: 14pt; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; word-wrap: break-word; overflow-wrap: break-word; }
   th { color: var(--text-secondary); font-weight: 500; }
   td { font-weight: 400; color: var(--text-primary); }
   td.name-cell { font-weight: 500; }
-  #fullTable td:last-child, #fullTable th:last-child { white-space: normal; min-width: 280px; max-width: 420px; }
-  .ref-table td, .ref-table th { white-space: normal; }
-  .ref-table td:first-child, .ref-table th:first-child { min-width: 160px; }
+  #fullTable th:nth-child(1), #fullTable td:nth-child(1) { width: 20%; }
+  #fullTable th:nth-child(2), #fullTable td:nth-child(2) { width: 14%; }
+  #fullTable th:nth-child(3), #fullTable td:nth-child(3) { width: 18%; }
+  #fullTable th:nth-child(4), #fullTable td:nth-child(4) { width: 12%; }
+  #fullTable th:nth-child(5), #fullTable td:nth-child(5) { width: 36%; }
+  .ref-table { table-layout: auto; }
+  .ref-table td:first-child, .ref-table th:first-child { width: 18%; }
 
   footer.disclaimer { margin-top: 34px; font-size: 14pt; font-weight: 300; color: var(--text-primary); border-top: 1.5px solid var(--border); padding-top: 18px; }
   footer.disclaimer p { margin: 0 0 8px; }
@@ -561,7 +565,7 @@ function renderFullTable() {
     tr.innerHTML = `
       <td class="name-cell">${item.name}${item.confirm ? ' ⚑' : ''}</td>
       <td>${item.category}</td>
-      <td>${platformBadges(item) || '<span class="badge badge-existing">—</span>'}</td>
+      <td><div class="platform-badges" style="margin-bottom:0;">${platformBadges(item) || '<span class="badge badge-existing">—</span>'}</div></td>
       <td>${item.saleStatus && item.saleStatus !== 'ga' ? `<span class="status-badge status-${item.saleStatus}">${itemStatusLabel(item.saleStatus)}</span>` : `<span class="status-badge status-ga">${itemStatusLabel('ga')}</span>`}</td>
       <td>${item.notes}</td>
     `;
