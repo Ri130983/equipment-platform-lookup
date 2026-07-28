@@ -167,7 +167,9 @@
   #fullTable th:nth-child(3), #fullTable td:nth-child(3) { width: 20%; }
   #fullTable th:nth-child(4), #fullTable td:nth-child(4) { width: 13%; }
   #fullTable th:nth-child(5), #fullTable td:nth-child(5) { width: 32%; }
-  #fullTable .badge { white-space: normal; }
+  #fullTable .badge { white-space: normal; max-width: 100%; box-sizing: border-box; }
+  #fullTable .platform-badges { max-width: 100%; }
+  #fullTable .status-badge, #fullTable .confirm-badge { white-space: normal; max-width: 100%; box-sizing: border-box; display: inline-block; }
   .ref-table td:first-child, .ref-table th:first-child { width: 18%; }
 
   footer.disclaimer { margin-top: 34px; font-size: 14pt; font-weight: 300; color: var(--text-primary); border-top: 1.5px solid var(--border); padding-top: 18px; }
