@@ -193,6 +193,7 @@
   .verdict-incompatible b { color: var(--error-red); }
   .verdict-icon { flex-shrink: 0; margin-top: 1px; }
   .verdict-detail { display: block; margin-top: 4px; font-weight: 400; }
+  .jump-to-detail { font-family: inherit; font-size: 14pt; font-weight: 700; color: inherit; text-decoration: underline; background: none; border: none; cursor: pointer; padding: 0; margin-left: 6px; white-space: nowrap; }
 
   a { color: var(--action-blue); }
 </style>
@@ -668,7 +669,66 @@ function renderICP() {
   });
 }
 
+function renderNeedsTray() {
+  const tray = document.getElementById('tray');
+  const chipsEl = document.getElementById('trayChips');
+  const verdictEl = document.getElementById('verdict');
+  const titleEl = document.getElementById('trayTitle');
+  const selectedNeeds = NEEDS.filter(n => state.selectedNeeds.has(n.id));
+
+  if (selectedNeeds.length === 0) {
+    tray.classList.remove('visible');
+    return;
+  }
+  tray.classList.add('visible');
+  titleEl.textContent = `Comparing ${selectedNeeds.length} need${selectedNeeds.length === 1 ? '' : 's'}`;
+
+  chipsEl.innerHTML = '';
+  selectedNeeds.forEach(need => {
+    const chip = document.createElement('div');
+    chip.className = 'tray-chip';
+    chip.innerHTML = `${need.label} <button type="button" aria-label="Remove ${need.label}">&times;</button>`;
+    chip.querySelector('button').addEventListener('click', () => {
+      state.selectedNeeds.delete(need.id);
+      render();
+    });
+    chipsEl.appendChild(chip);
+  });
+
+  verdictEl.className = 'verdict';
+  const jumpLink = `<button type="button" class="jump-to-detail">See full breakdown ↑</button>`;
+
+  if (selectedNeeds.length === 1) {
+    verdictEl.classList.add('verdict-compatible');
+    verdictEl.innerHTML = `<span class="verdict-icon">ℹ️</span><span class="verdict-text">Add another need to check whether they work together. ${jumpLink}</span>`;
+  } else {
+    const commonPlatforms = ['v1', 'v2'].filter(p => selectedNeeds.every(n => n.platforms.includes(p)));
+    if (commonPlatforms.length === 2) {
+      verdictEl.classList.add('verdict-compatible');
+      verdictEl.innerHTML = `<span class="verdict-icon">✅</span><span class="verdict-text">Either platform works for everything selected. ${jumpLink}</span>`;
+    } else if (commonPlatforms.length === 1) {
+      verdictEl.classList.add('verdict-compatible');
+      verdictEl.innerHTML = `<span class="verdict-icon">✅</span><span class="verdict-text">Recommended: <b>${PLATFORM_LABEL[commonPlatforms[0]]}</b>. ${jumpLink}</span>`;
+    } else {
+      verdictEl.classList.add('verdict-incompatible');
+      verdictEl.innerHTML = `<span class="verdict-icon">⚠️</span><span class="verdict-text"><b>Conflict</b> — no single platform covers everything selected. ${jumpLink}</span>`;
+    }
+  }
+
+  const jumpBtn = verdictEl.querySelector('.jump-to-detail');
+  if (jumpBtn) {
+    jumpBtn.addEventListener('click', () => {
+      document.getElementById('needsRecommendation').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+}
+
 function renderTray() {
+  if (state.mode === 'needs') {
+    renderNeedsTray();
+    return;
+  }
+
   const tray = document.getElementById('tray');
   const chipsEl = document.getElementById('trayChips');
   const verdictEl = document.getElementById('verdict');
@@ -855,7 +915,11 @@ document.querySelectorAll('.mode-tab').forEach(btn => {
   btn.addEventListener('click', () => { state.mode = btn.dataset.mode; render(); });
 });
 document.getElementById('search').addEventListener('input', (e) => { state.query = e.target.value; render(); });
-document.getElementById('clearAll').addEventListener('click', () => { state.selected.clear(); render(); });
+document.getElementById('clearAll').addEventListener('click', () => {
+  if (state.mode === 'needs') state.selectedNeeds.clear();
+  else state.selected.clear();
+  render();
+});
 
 renderFullTable();
 renderGuardrails();
